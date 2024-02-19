@@ -1,4 +1,4 @@
-package com.capstone.projectname.user;
+package com.capstone.projectname.appUser;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
