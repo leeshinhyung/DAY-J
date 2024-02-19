@@ -1,0 +1,1 @@
+insert into fGroup(group_id, group_name) values(1,'tlsgud');
