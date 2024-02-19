@@ -10,13 +10,12 @@ import java.util.List;
 public class TodoController {
     TodoRepository todoRepository;
     
-    
     public TodoController(TodoRepository todoRepository) {
         this.todoRepository = todoRepository;
     }
-    
-    @GetMapping("/test")
-    public List<Todo> returnTest() {
+
+    @GetMapping("/test-todo")
+    public List<Todo> returnTestTodo() {
         List<Todo> todos = todoRepository.findAll();
         return todos;
     }

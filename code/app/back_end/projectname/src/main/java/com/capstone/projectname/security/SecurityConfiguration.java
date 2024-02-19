@@ -15,7 +15,7 @@ import java.util.function.Function;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
-class SpringSecurityConfiguration {
+class SecurityConfiguration {
     // LDAP or Database
     // In Memory
     
