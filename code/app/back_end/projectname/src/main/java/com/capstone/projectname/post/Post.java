@@ -36,4 +36,105 @@ public class Post {
     private Date postDate;
     private Date postCommentDate;
     
+    public Post() {
+    }
+    
+    public Post(int id, int postView, int postLike, String postContent, String postName, String postTag, String postComment, Date postDate, Date postCommentDate) {
+        this.id = id;
+        this.postView = postView;
+        this.postLike = postLike;
+        this.postContent = postContent;
+        this.postName = postName;
+        this.postTag = postTag;
+        this.postComment = postComment;
+        this.postDate = postDate;
+        this.postCommentDate = postCommentDate;
+    }
+    
+    public int getId() {
+        return id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    public int getPostView() {
+        return postView;
+    }
+    
+    public void setPostView(int postView) {
+        this.postView = postView;
+    }
+    
+    public int getPostLike() {
+        return postLike;
+    }
+    
+    public void setPostLike(int postLike) {
+        this.postLike = postLike;
+    }
+    
+    public String getPostContent() {
+        return postContent;
+    }
+    
+    public void setPostContent(String postContent) {
+        this.postContent = postContent;
+    }
+    
+    public String getPostName() {
+        return postName;
+    }
+    
+    public void setPostName(String postName) {
+        this.postName = postName;
+    }
+    
+    public String getPostTag() {
+        return postTag;
+    }
+    
+    public void setPostTag(String postTag) {
+        this.postTag = postTag;
+    }
+    
+    public String getPostComment() {
+        return postComment;
+    }
+    
+    public void setPostComment(String postComment) {
+        this.postComment = postComment;
+    }
+    
+    public Date getPostDate() {
+        return postDate;
+    }
+    
+    public void setPostDate(Date postDate) {
+        this.postDate = postDate;
+    }
+    
+    public Date getPostCommentDate() {
+        return postCommentDate;
+    }
+    
+    public void setPostCommentDate(Date postCommentDate) {
+        this.postCommentDate = postCommentDate;
+    }
+    
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", postView=" + postView +
+                ", postLike=" + postLike +
+                ", postContent='" + postContent + '\'' +
+                ", postName='" + postName + '\'' +
+                ", postTag='" + postTag + '\'' +
+                ", postComment='" + postComment + '\'' +
+                ", postDate=" + postDate +
+                ", postCommentDate=" + postCommentDate +
+                '}';
+    }
 }

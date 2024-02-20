@@ -13,9 +13,18 @@ public class AppUserController {
         this.appUserRepository = appUserRepository;
     }
     
-    @GetMapping("/test-appUser")
-    public List<AppUser> returnTestUser() {
-        List<AppUser> appUsers = appUserRepository.findAll();
-        return appUsers;
+    @GetMapping("/find-appUser")
+    public List<AppUser> returnTest() {
+        return appUserRepository.findAll();
+    }
+    
+    @GetMapping("/find-appUser-id")
+    public AppUser findById() {
+        return appUserRepository.findById(1).get();
+    }
+    
+    @GetMapping("/delete-appUser-id")
+    public void deleteById() {
+        appUserRepository.deleteById(1);
     }
 }
