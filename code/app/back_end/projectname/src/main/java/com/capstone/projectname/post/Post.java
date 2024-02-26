@@ -9,7 +9,6 @@ import java.sql.Date;
 
 @Entity
 public class Post {
-    
     @Id
     @Column(nullable = false)
     private int id;
