@@ -1,6 +1,10 @@
 package com.capstone.projectname.plan;
 
+import com.capstone.projectname.appUser.AppUser;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -27,5 +31,10 @@ public class PlanController {
     @GetMapping("/delete-plan-id")
     public void deleteById() {
         planRepository.deleteById(1);
+    }
+
+    @PostMapping("/update-plan")
+    public void update(@Valid @RequestBody Plan plan) {
+        Plan savedPlan = planRepository.save(plan);
     }
 }
