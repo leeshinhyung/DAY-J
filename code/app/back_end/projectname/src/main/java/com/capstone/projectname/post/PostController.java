@@ -16,7 +16,7 @@ public class PostController {
     }
     
     @GetMapping("/find-post")
-    public List<Post> returnTest() {
+    public List<Post> findAll() {
         return postRepository.findAll();
     }
     

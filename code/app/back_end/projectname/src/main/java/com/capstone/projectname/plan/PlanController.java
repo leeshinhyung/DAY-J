@@ -15,7 +15,7 @@ public class PlanController {
     }
     
     @GetMapping("/find-plan")
-    public List<Plan> returnTest() {
+    public List<Plan> findAll() {
         return planRepository.findAll();
     }
 

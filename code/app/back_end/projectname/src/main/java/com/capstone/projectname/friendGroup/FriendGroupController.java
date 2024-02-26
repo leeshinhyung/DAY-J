@@ -17,7 +17,7 @@ public class FriendGroupController {
     }
     
     @GetMapping("/find-friendGroup")
-    public List<FriendGroup> returnTest() {
+    public List<FriendGroup> findAll() {
         return friendGroupRepository.findAll();
     }
     
