@@ -1,38 +1,43 @@
 package com.capstone.projectname.post;
 
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
 public class PostController {
-    PostRepository postRepository;
+    PostService postService;
     
-    public PostController(PostRepository postRepository) {
-        this.postRepository = postRepository;
+    public PostController(PostService postService) {
+        this.postService = postService;
     }
     
     @GetMapping("/find-post")
     public List<Post> findAll() {
-        return postRepository.findAll();
+        return postService.findAll();
     }
     
-    @GetMapping("/find-post-id")
+    @GetMapping("/find-post/{id}")
     public Post findById() {
-        return postRepository.findById(1).get();
+        return postService.findOne(1);
     }
     
-    @PostMapping("/update-post")
-    public void update(@Valid @RequestBody Post post) {
-        Post savedPost = postRepository.save(post);
+    @PostMapping("/create-post")
+    public ResponseEntity<Post> create(@Valid @RequestBody Post post) {
+        Post savedPost = postService.save(post);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedPost.getId())
+                .toUri();
+        return ResponseEntity.created(location).build();
     }
-    
-    @GetMapping("/delete-post-id")
+
+    @DeleteMapping("/delete-post/{id}")
     public void deleteById() {
-        postRepository.deleteById(1);
+        postService.deleteById(1);
     }
 }
