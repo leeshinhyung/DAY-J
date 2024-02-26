@@ -5,96 +5,119 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import org.hibernate.annotations.ColumnDefault;
 
-import java.time.LocalDate;
-
 @Entity
 public class AppUser {
     @Id
     private int id;
-    
+
     private String nickname;
     @Column(nullable = false)
     private String password;
-    
+
     @Column(nullable = false)
     @ColumnDefault("1")
-    private boolean alarmOnOff;
-    
+    private boolean friendGroupAlarm;
+    private boolean planAlarm;
+    private boolean postAlarm;
+    private boolean appAlarm;
+
     @Column(nullable = false)
-    private LocalDate alarmDate;
-    
-    private String profilePhotoPath;
-    
+    private String profilePhoto;
+
     public AppUser() {
-    
+
     }
-    
-    public AppUser(int id, String password, String nickname, boolean alarmOnOff, LocalDate alarmDate, String profilePhotoPath) {
+
+    public AppUser(int id, String nickname, String password, boolean friendGroupAlarm, boolean planAlarm, boolean postAlarm, boolean appAlarm,
+                   String profilePhoto) {
         this.id = id;
-        this.password = password;
         this.nickname = nickname;
-        this.alarmOnOff = alarmOnOff;
-        this.alarmDate = alarmDate;
-        this.profilePhotoPath = profilePhotoPath;
+        this.password = password;
+        this.friendGroupAlarm = friendGroupAlarm;
+        this.planAlarm = planAlarm;
+        this.postAlarm = postAlarm;
+        this.appAlarm = appAlarm;
+        this.profilePhoto = profilePhoto;
     }
-    
+
     public int getId() {
         return id;
     }
-    
+
     public void setId(int id) {
         this.id = id;
     }
-    
-    public String getPassword() {
-        return password;
-    }
-    
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    
+
     public String getNickname() {
         return nickname;
     }
-    
+
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
-    
-    public boolean isAlarmOnOff() {
-        return alarmOnOff;
+
+    public String getPassword() {
+        return password;
     }
-    
-    public void setAlarmOnOff(boolean alarmOnOff) {
-        this.alarmOnOff = alarmOnOff;
+
+    public void setPassword(String password) {
+        this.password = password;
     }
-    
-    public LocalDate getAlarmDate() {
-        return alarmDate;
+
+    public boolean isFriendGroupAlarm() {
+        return friendGroupAlarm;
     }
-    
-    public void setAlarmDate(LocalDate alarmDate) {
-        this.alarmDate = alarmDate;
+
+    public void setFriendGroupAlarm(boolean friendGroupAlarm) {
+        this.friendGroupAlarm = friendGroupAlarm;
     }
-    
-    public String getProfilePhotoPath() {
-        return profilePhotoPath;
+
+    public boolean isPlanAlarm() {
+        return planAlarm;
     }
-    
-    public void setProfilePhotoPath(String profilePhotoPath) {
-        this.profilePhotoPath = profilePhotoPath;
+
+    public void setPlanAlarm(boolean planAlarm) {
+        this.planAlarm = planAlarm;
     }
-    
+
+    public boolean isPostAlarm() {
+        return postAlarm;
+    }
+
+    public void setPostAlarm(boolean postAlarm) {
+        this.postAlarm = postAlarm;
+    }
+
+    public boolean isAppAlarm() {
+        return appAlarm;
+    }
+
+    public void setAppAlarm(boolean appAlarm) {
+        this.appAlarm = appAlarm;
+    }
+
+    public String getProfilePhoto() {
+        return profilePhoto;
+    }
+
+    public void setProfilePhotoPath(String profilePhoto) {
+        this.profilePhoto = profilePhoto;
+    }
+
     @Override
     public String toString() {
         return "AppUser{" +
                 "id=" + id +
-                ", password='" + password + '\'' +
                 ", nickname='" + nickname + '\'' +
-                ", alarmOnOff=" + alarmOnOff +
-                ", alarmDate=" + alarmDate +
-                ", profilePhotoPath='" + profilePhotoPath + '\'' +
+                ", password='" + password + '\'' +
+                ", friendGroupAlarm=" + friendGroupAlarm +
+                ", planAlarm=" + planAlarm +
+                ", postAlarm=" + postAlarm +
+                ", appAlarm=" + appAlarm +
+                ", profilePhotoPath='" + profilePhoto + '\'' +
                 '}';
     }
 }
+
+    
+
