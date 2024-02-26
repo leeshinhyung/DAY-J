@@ -4,8 +4,10 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.cglib.core.Local;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 public class Post {
@@ -24,8 +26,8 @@ public class Post {
     private String postComment;
     
     @Column(nullable = false)
-    private Date postDate;
-    private Date postCommentDate;
+    private LocalDate postDate;
+    private LocalDate postCommentDate;
 
     @Column(nullable = false)
     @ColumnDefault("1")
@@ -38,7 +40,7 @@ public class Post {
     public Post() {
     }
 
-    public Post(int id, int postView, int postLike, String postContent, String postName, String postTag, String postComment, Date postDate, Date postCommentDate, boolean postIsAnonymous, boolean commentIsAnonymous, String postPhoto) {
+    public Post(int id, int postView, int postLike, String postContent, String postName, String postTag, String postComment, LocalDate postDate, LocalDate postCommentDate, boolean postIsAnonymous, boolean commentIsAnonymous, String postPhoto) {
         this.id = id;
         this.postView = postView;
         this.postLike = postLike;
@@ -107,19 +109,19 @@ public class Post {
         this.postComment = postComment;
     }
 
-    public Date getPostDate() {
+    public LocalDate getPostDate() {
         return postDate;
     }
 
-    public void setPostDate(Date postDate) {
+    public void setPostDate(LocalDate postDate) {
         this.postDate = postDate;
     }
 
-    public Date getPostCommentDate() {
+    public LocalDate getPostCommentDate() {
         return postCommentDate;
     }
 
-    public void setPostCommentDate(Date postCommentDate) {
+    public void setPostCommentDate(LocalDate postCommentDate) {
         this.postCommentDate = postCommentDate;
     }
 
