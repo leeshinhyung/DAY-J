@@ -1,7 +1,12 @@
 package com.capstone.projectname.post;
 
 import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.JoinColumnOrFormula;
 import org.springframework.cglib.core.Local;
 
 import java.sql.Date;
