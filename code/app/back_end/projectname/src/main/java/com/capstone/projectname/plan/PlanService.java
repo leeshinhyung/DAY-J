@@ -9,32 +9,32 @@ import java.util.function.Predicate;
 
 @Service
 public class PlanService {
-    private static List<Plan> plan = new ArrayList<>();
+    private static List<Plan> plans = new ArrayList<>();
     private static int planCount = 0;
-
-    static{
-        plan.add(new Plan(++planCount, false, LocalDate.now(), LocalDate.now(), "diet", "60kg", "photo", LocalDate.now(), LocalDate.now()));
-        plan.add(new Plan(++planCount, true, LocalDate.now(), LocalDate.now(), "study", "score100", "photo", LocalDate.now(), LocalDate.now()));
-        plan.add(new Plan(++planCount, false, LocalDate.now(), LocalDate.now(), "trip", "jeju", "photo", LocalDate.now(), LocalDate.now()));
+    
+    static {
+        plans.add(new Plan(++planCount, false, LocalDate.now(), LocalDate.now(), "diet", "60kg", "photo", LocalDate.now(), LocalDate.now()));
+        plans.add(new Plan(++planCount, true, LocalDate.now(), LocalDate.now(), "study", "score100", "photo", LocalDate.now(), LocalDate.now()));
+        plans.add(new Plan(++planCount, false, LocalDate.now(), LocalDate.now(), "trip", "jeju", "photo", LocalDate.now(), LocalDate.now()));
     }
-
-    public List<Plan> findAll(){
+    
+    public Plan save(Plan plan) {
+        plan.setId(++planCount);
+        plans.add(plan);
         return plan;
     }
-
-    public Plan save(Plan plans) {
-        plans.setPlanId(++planCount);
-        plan.add(plans);
+    
+    public List<Plan> findAll() {
         return plans;
     }
-
-    public Plan findOne(int id){
-        Predicate<? super Plan> predicate = plan -> plan.getPlanId() == id;
-        return plan.stream().filter(predicate).findFirst().orElse(null);
+    
+    public Plan findOne(int id) {
+        Predicate<? super Plan> predicate = plan -> plan.getId() == id;
+        return plans.stream().filter(predicate).findFirst().orElse(null);
     }
-
-    public void deleteById(int id){
-        Predicate<? super Plan> predicate = plan -> plan.getPlanId() == id;
-        plan.removeIf(predicate);
+    
+    public void deleteById(int id) {
+        Predicate<? super Plan> predicate = plan -> plan.getId() == id;
+        plans.removeIf(predicate);
     }
 }

@@ -24,14 +24,14 @@ public class PostService {
                 false, false, "good"));
     }
     
-    public List<Post> findAll() {
-        return posts;
-    }
-    
     public Post save(Post user) {
         user.setId(++postsCount);
         posts.add(user);
         return user;
+    }
+    
+    public List<Post> findAll() {
+        return posts;
     }
     
     public Post findOne(int id) {

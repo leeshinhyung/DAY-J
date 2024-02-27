@@ -1,6 +1,5 @@
 package com.capstone.projectname.appUser;
 
-import com.capstone.projectname.post.Post;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,16 +16,6 @@ public class AppUserController {
         this.appUserService = appUserService;
     }
     
-    @GetMapping("/find-appUser")
-    public List<AppUser> findAll() {
-        return appUserService.findAll();
-    }
-    
-    @GetMapping("/find-appUser/{id}")
-    public AppUser findById() {
-        return appUserService.findOne(1);
-    }
-    
     @PostMapping("/create-appUser")
     public ResponseEntity<AppUser> create(@Valid @RequestBody AppUser appUser) {
         AppUser savedAppUser = appUserService.save(appUser);
@@ -36,9 +25,19 @@ public class AppUserController {
                 .toUri();
         return ResponseEntity.created(location).build();
     }
-
+    
+    @GetMapping("/find-appUser")
+    public List<AppUser> findAll() {
+        return appUserService.findAll();
+    }
+    
+    @GetMapping("/find-appUser/{id}")
+    public AppUser findById(@PathVariable int id) {
+        return appUserService.findOne(id);
+    }
+    
     @DeleteMapping("/delete-appUser/{id}")
-    public void deleteById() {
-        appUserService.deleteById(1);
+    public void deleteById(@PathVariable int id) {
+        appUserService.deleteById(id);
     }
 }

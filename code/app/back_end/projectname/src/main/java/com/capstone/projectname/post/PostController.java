@@ -16,16 +16,6 @@ public class PostController {
         this.postService = postService;
     }
     
-    @GetMapping("/find-post")
-    public List<Post> findAll() {
-        return postService.findAll();
-    }
-    
-    @GetMapping("/find-post/{id}")
-    public Post findById() {
-        return postService.findOne(1);
-    }
-    
     @PostMapping("/create-post")
     public ResponseEntity<Post> create(@Valid @RequestBody Post post) {
         Post savedPost = postService.save(post);
@@ -35,9 +25,21 @@ public class PostController {
                 .toUri();
         return ResponseEntity.created(location).build();
     }
-
+    
+    @GetMapping("/find-post")
+    public List<Post> findAll() {
+        return postService.findAll();
+    }
+    
+    @GetMapping("/find-post/{id}")
+    public Post findById(@PathVariable int id) {
+        Post post = postService.findOne(id);
+        return post;
+    }
+    
+    
     @DeleteMapping("/delete-post/{id}")
-    public void deleteById() {
-        postService.deleteById(1);
+    public void deleteById(@PathVariable int id) {
+        postService.deleteById(id);
     }
 }

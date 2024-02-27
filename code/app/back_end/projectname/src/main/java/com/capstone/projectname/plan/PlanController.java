@@ -1,40 +1,45 @@
 package com.capstone.projectname.plan;
 
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
 public class PlanController {
-    PlanRepository planRepository;
+    PlanService planService;
     
-    
-    public PlanController(PlanRepository planRepository) {
-        this.planRepository = planRepository;
+    public PlanController(PlanService planService) {
+        this.planService = planService;
     }
     
+    @PostMapping("/create-plan")
+    public ResponseEntity<Plan> create(@Valid @RequestBody Plan plan) {
+        Plan savedPlan = planService.save(plan);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedPlan.getId())
+                .toUri();
+        return ResponseEntity.created(location).build();
+    }
     
     @GetMapping("/find-plan")
     public List<Plan> findAll() {
-        return planRepository.findAll();
+        return planService.findAll();
     }
-
+    
     @GetMapping("/find-plan/{id}")
-    public Plan findById() {
-        return planRepository.findById(1).get();
+    public Plan findById(@PathVariable int id) {
+        Plan plan = planService.findOne(id);
+        return plan;
     }
-
-    @GetMapping("/delete-plan/{id}")
-    public void deleteById() {
-        planRepository.deleteById(1);
-    }
-
-    @PostMapping("/update-plan/{id}")
-    public void update(@Valid @RequestBody Plan plan) {
-        Plan savedPlan = planRepository.save(plan);
+    
+    
+    @DeleteMapping("/delete-plan/{id}")
+    public void deleteById(@PathVariable int id) {
+        planService.deleteById(id);
     }
 }

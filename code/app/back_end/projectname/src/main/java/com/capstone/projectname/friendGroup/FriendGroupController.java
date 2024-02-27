@@ -17,16 +17,6 @@ public class FriendGroupController {
         this.friendGroupService = friendGroupService;
     }
     
-    @GetMapping("/find-friendGroup")
-    public List<FriendGroup> findAll() {
-        return friendGroupService.findAll();
-    }
-    
-    @GetMapping("/find-friendGroup/{id}")
-    public FriendGroup findById() {
-        return friendGroupService.findOne(1);
-    }
-
     @PostMapping("/create-friendGroup")
     public ResponseEntity<FriendGroup> create(@Valid @RequestBody FriendGroup friendGroup) {
         FriendGroup savedFriendGroup = friendGroupService.save(friendGroup);
@@ -36,9 +26,20 @@ public class FriendGroupController {
                 .toUri();
         return ResponseEntity.created(location).build();
     }
-
+    
+    @GetMapping("/find-friendGroup")
+    public List<FriendGroup> findAll() {
+        return friendGroupService.findAll();
+    }
+    
+    @GetMapping("/find-friendGroup/{id}")
+    public FriendGroup findById(@PathVariable int id) {
+        return friendGroupService.findOne(id);
+    }
+    
+    
     @DeleteMapping("/delete-friendGroup/{id}")
-    public void deleteById() {
-        friendGroupService.deleteById(1);
+    public void deleteById(@PathVariable int id) {
+        friendGroupService.deleteById(id);
     }
 }

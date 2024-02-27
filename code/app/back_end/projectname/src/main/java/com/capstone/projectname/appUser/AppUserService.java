@@ -17,17 +17,17 @@ public class AppUserService {
         appUsers.add(new AppUser(++appUsersCount, "name", "sdlkjwe", true, true, true, true, "what"));
         appUsers.add(new AppUser(++appUsersCount, "name", "wdferlkasd", true, true, true, true, "what"));
     }
-
-    public List<AppUser> findAll(){
-        return appUsers;
-    }
-
+    
     public AppUser save(AppUser user) {
         user.setId(++appUsersCount);
         appUsers.add(user);
         return user;
     }
 
+    public List<AppUser> findAll(){
+        return appUsers;
+    }
+    
     public AppUser findOne(int id){
         Predicate<? super AppUser> predicate = appUser -> appUser.getId() == id;
         return appUsers.stream().filter(predicate).findFirst().orElse(null);
