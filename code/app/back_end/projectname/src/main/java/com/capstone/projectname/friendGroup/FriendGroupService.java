@@ -1,5 +1,6 @@
 package com.capstone.projectname.friendGroup;
 
+import com.capstone.projectname.appUser.AppUser;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,22 +18,29 @@ public class FriendGroupService {
         friendGroups.add(new FriendGroup(++friendGroupsCount, "capstone", "stone...", false));
     }
     
-    public FriendGroup save(FriendGroup group) {
+    public FriendGroup createFriendGroup(FriendGroup group) {
         group.setGroupId(++friendGroupsCount);
         friendGroups.add(group);
         return group;
     }
 
-    public List<FriendGroup> findAll() {
+    public List<FriendGroup> readAllFriendGroup() {
         return friendGroups;
     }
     
-    public FriendGroup findOne(int id) {
+    public FriendGroup readFriendGroupById(int id) {
         Predicate<? super FriendGroup> predicate = friendGroup -> friendGroup.getGroupId() == id;
         return friendGroups.stream().filter(predicate).findFirst().orElse(null);
     }
 
-    public void deleteById(int id){
+    public void updateFriendGroup(FriendGroup friendGroup) {
+        Predicate<? super FriendGroup> predicate = group -> group.getGroupId() == friendGroup.getGroupId();
+        FriendGroup prevFriendGroup = friendGroups.stream().filter(predicate).findFirst().orElse(null);
+        friendGroups.remove(prevFriendGroup);
+        friendGroups.add(friendGroup);
+    }
+
+    public void deleteFriendGroupById(int id){
         Predicate<? super FriendGroup> predicate = friendGroup -> friendGroup.getGroupId() == id;
         friendGroups.removeIf(predicate);
     }

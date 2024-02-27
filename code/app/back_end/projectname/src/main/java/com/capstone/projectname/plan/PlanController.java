@@ -1,5 +1,6 @@
 package com.capstone.projectname.plan;
 
+import com.capstone.projectname.appUser.AppUser;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +17,9 @@ public class PlanController {
         this.planService = planService;
     }
     
-    @PostMapping("/create-plan")
-    public ResponseEntity<Plan> create(@Valid @RequestBody Plan plan) {
-        Plan savedPlan = planService.save(plan);
+    @PostMapping("/plan/create")
+    public ResponseEntity<Plan> createPlan(@Valid @RequestBody Plan plan) {
+        Plan savedPlan = planService.createPlan(plan);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(savedPlan.getId())
@@ -26,20 +27,28 @@ public class PlanController {
         return ResponseEntity.created(location).build();
     }
     
-    @GetMapping("/find-plan")
-    public List<Plan> findAll() {
-        return planService.findAll();
+    @GetMapping("/plan/read")
+    public List<Plan> readAllPlan() {
+        return planService.readAllPlan();
     }
     
-    @GetMapping("/find-plan/{id}")
-    public Plan findById(@PathVariable int id) {
-        Plan plan = planService.findOne(id);
-        return plan;
+    @GetMapping("/plan/read/{id}")
+    public Plan readPlanById(@PathVariable int id) {
+        return planService.readPlanById(id);
     }
-    
-    
-    @DeleteMapping("/delete-plan/{id}")
-    public void deleteById(@PathVariable int id) {
-        planService.deleteById(id);
+
+    @GetMapping("/plan/update/{id}")
+    public Plan updatePlanView(@PathVariable int id) {
+        return planService.readPlanById(id);
+    }
+
+    @PatchMapping("/plan/update/{id}")
+    public void patchPlan(@Valid @RequestBody Plan plan) {
+        planService.updatePlan(plan);
+    }
+
+    @DeleteMapping("/plan/delete/{id}")
+    public void deletePlanById(@PathVariable int id) {
+        planService.deletePlanById(id);
     }
 }
