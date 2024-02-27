@@ -1,5 +1,6 @@
 package com.capstone.projectname.post;
 
+import com.capstone.projectname.appUser.AppUser;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -24,22 +25,29 @@ public class PostService {
                 false, false, "good"));
     }
     
-    public Post save(Post user) {
+    public Post createPost(Post user) {
         user.setId(++postsCount);
         posts.add(user);
         return user;
     }
     
-    public List<Post> findAll() {
+    public List<Post> readAllPost() {
         return posts;
     }
     
-    public Post findOne(int id) {
+    public Post readPostById(int id) {
         Predicate<? super Post> predicate = post -> post.getId() == id;
         return posts.stream().filter(predicate).findFirst().orElse(null);
     }
+
+    public void updatePost(Post post){
+        Predicate<? super Post> predicate = user -> user.getId() == post.getId();
+        Post prevPost = posts.stream().filter(predicate).findFirst().orElse(null);
+        posts.remove(prevPost);
+        posts.add(post);
+    }
     
-    public void deleteById(int id) {
+    public void deletePostById(int id) {
         Predicate<? super Post> predicate = post -> post.getId() == id;
         posts.removeIf(predicate);
     }

@@ -1,5 +1,6 @@
 package com.capstone.projectname.plan;
 
+import com.capstone.projectname.appUser.AppUser;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -18,22 +19,29 @@ public class PlanService {
         plans.add(new Plan(++planCount, false, LocalDate.now(), LocalDate.now(), "trip", "jeju", "photo", LocalDate.now(), LocalDate.now()));
     }
     
-    public Plan save(Plan plan) {
+    public Plan createPlan(Plan plan) {
         plan.setId(++planCount);
         plans.add(plan);
         return plan;
     }
     
-    public List<Plan> findAll() {
+    public List<Plan> readAllPlan() {
         return plans;
     }
     
-    public Plan findOne(int id) {
+    public Plan readPlanById(int id) {
         Predicate<? super Plan> predicate = plan -> plan.getId() == id;
         return plans.stream().filter(predicate).findFirst().orElse(null);
     }
+
+    public void updatePlan(Plan plan) {
+        Predicate<? super Plan> predicate = user -> user.getId() == plan.getId();
+        Plan prevPlan = plans.stream().filter(predicate).findFirst().orElse(null);
+        plans.remove(prevPlan);
+        plans.add(plan);
+    }
     
-    public void deleteById(int id) {
+    public void deletePlanById(int id) {
         Predicate<? super Plan> predicate = plan -> plan.getId() == id;
         plans.removeIf(predicate);
     }

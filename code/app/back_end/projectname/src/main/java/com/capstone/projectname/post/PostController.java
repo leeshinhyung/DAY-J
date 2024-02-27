@@ -1,5 +1,6 @@
 package com.capstone.projectname.post;
 
+import com.capstone.projectname.appUser.AppUser;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +17,9 @@ public class PostController {
         this.postService = postService;
     }
     
-    @PostMapping("/create-post")
-    public ResponseEntity<Post> create(@Valid @RequestBody Post post) {
-        Post savedPost = postService.save(post);
+    @PostMapping("/post/create")
+    public ResponseEntity<Post> createPost(@Valid @RequestBody Post post) {
+        Post savedPost = postService.createPost(post);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(savedPost.getId())
@@ -26,20 +27,28 @@ public class PostController {
         return ResponseEntity.created(location).build();
     }
     
-    @GetMapping("/find-post")
-    public List<Post> findAll() {
-        return postService.findAll();
+    @GetMapping("/post/read")
+    public List<Post> readAllPost() {
+        return postService.readAllPost();
     }
     
-    @GetMapping("/find-post/{id}")
-    public Post findById(@PathVariable int id) {
-        Post post = postService.findOne(id);
-        return post;
+    @GetMapping("/post/read/{id}")
+    public Post readPostById(@PathVariable int id) {
+        return postService.readPostById(id);
+    }
+
+    @GetMapping("/post/update/{id}")
+    public Post updatePostView(@PathVariable int id) {
+        return postService.readPostById(id);
+    }
+
+    @PatchMapping("/post/update/{id}")
+    public void patchPost(@Valid @RequestBody Post post) {
+        postService.updatePost(post);
     }
     
-    
-    @DeleteMapping("/delete-post/{id}")
-    public void deleteById(@PathVariable int id) {
-        postService.deleteById(id);
+    @DeleteMapping("/post/delete/{id}")
+    public void deletePostById(@PathVariable int id) {
+        postService.deletePostById(id);
     }
 }

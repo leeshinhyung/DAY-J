@@ -17,9 +17,9 @@ public class FriendGroupController {
         this.friendGroupService = friendGroupService;
     }
     
-    @PostMapping("/create-friendGroup")
-    public ResponseEntity<FriendGroup> create(@Valid @RequestBody FriendGroup friendGroup) {
-        FriendGroup savedFriendGroup = friendGroupService.save(friendGroup);
+    @PostMapping("/friendGroup/create")
+    public ResponseEntity<FriendGroup> createFriendGroup(@Valid @RequestBody FriendGroup friendGroup) {
+        FriendGroup savedFriendGroup = friendGroupService.createFriendGroup(friendGroup);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(savedFriendGroup.getGroupId())
@@ -27,19 +27,28 @@ public class FriendGroupController {
         return ResponseEntity.created(location).build();
     }
     
-    @GetMapping("/find-friendGroup")
-    public List<FriendGroup> findAll() {
-        return friendGroupService.findAll();
+    @GetMapping("/friendGroup/read")
+    public List<FriendGroup> readAllFriendGroup() {
+        return friendGroupService.readAllFriendGroup();
     }
     
-    @GetMapping("/find-friendGroup/{id}")
-    public FriendGroup findById(@PathVariable int id) {
-        return friendGroupService.findOne(id);
+    @GetMapping("/friendGroup/read/{id}")
+    public FriendGroup readFriendGroupById(@PathVariable int id) {
+        return friendGroupService.readFriendGroupById(id);
     }
     
-    
-    @DeleteMapping("/delete-friendGroup/{id}")
-    public void deleteById(@PathVariable int id) {
-        friendGroupService.deleteById(id);
+    @GetMapping("/friendGroup/update/{id}")
+    public FriendGroup updateFriendGroupView(@PathVariable int id) {
+        return friendGroupService.readFriendGroupById(id);
+    }
+
+    @PatchMapping("/friendGroup/update/{id}")
+    public void patchFriendGroup(@Valid @RequestBody FriendGroup friendGroup) {
+        friendGroupService.updateFriendGroup(friendGroup);
+    }
+
+    @DeleteMapping("/friendGroup/delete/{id}")
+    public void deleteFriendGroupById(@PathVariable int id) {
+       friendGroupService.deleteFriendGroupById(id);
     }
 }
