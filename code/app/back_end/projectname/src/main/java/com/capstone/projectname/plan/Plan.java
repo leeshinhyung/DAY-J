@@ -32,7 +32,7 @@ public class Plan {
     private String planPhoto;
 
     @Column(nullable = false)
-    private Time planTime;
+    private LocalDate planTime;
 
     @Column(nullable = false)
     private LocalDate planDay;
@@ -41,7 +41,7 @@ public class Plan {
     public Plan() {
     }
 
-    public Plan(int planId, boolean isComplete, LocalDate planAlarmDate, LocalDate planCreateDate, String planTag, String goal, String planPhoto, Time planTime, LocalDate planDay) {
+    public Plan(int planId, boolean isComplete, LocalDate planAlarmDate, LocalDate planCreateDate, String planTag, String goal, String planPhoto, LocalDate planTime, LocalDate planDay) {
         this.planId = planId;
         this.isComplete = isComplete;
         this.planAlarmDate = planAlarmDate;
@@ -110,11 +110,11 @@ public class Plan {
         this.planPhoto = planPhoto;
     }
 
-    public Time getPlanTime() {
+    public LocalDate getPlanTime() {
         return planTime;
     }
 
-    public void setPlanTime(Time planTime) {
+    public void setPlanTime(LocalDate planTime) {
         this.planTime = planTime;
     }
     public LocalDate getPlanDay() {

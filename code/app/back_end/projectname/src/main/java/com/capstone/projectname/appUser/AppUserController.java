@@ -1,38 +1,44 @@
 package com.capstone.projectname.appUser;
 
+import com.capstone.projectname.post.Post;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
 public class AppUserController {
-    AppUserRepository appUserRepository;
+    AppUserService appUserService;
     
-    public AppUserController(AppUserRepository appUserRepository) {
-        this.appUserRepository = appUserRepository;
+    public AppUserController(AppUserService appUserService) {
+        this.appUserService = appUserService;
     }
     
     @GetMapping("/find-appUser")
-    public List<AppUser> returnTest() {
-        return appUserRepository.findAll();
+    public List<AppUser> findAll() {
+        return appUserService.findAll();
     }
     
-    @GetMapping("/find-appUser-id")
+    @GetMapping("/find-appUser/{id}")
     public AppUser findById() {
-        return appUserRepository.findById(1).get();
+        return appUserService.findOne(1);
     }
     
-    @PostMapping("/update-appUser")
-    public void update(@Valid @RequestBody AppUser appUser) {
-        AppUser savedAppUser = appUserRepository.save(appUser);
+    @PostMapping("/create-appUser")
+    public ResponseEntity<AppUser> create(@Valid @RequestBody AppUser appUser) {
+        AppUser savedAppUser = appUserService.save(appUser);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedAppUser.getId())
+                .toUri();
+        return ResponseEntity.created(location).build();
     }
-    
-    @GetMapping("/delete-appUser-id")
+
+    @DeleteMapping("/delete-appUser/{id}")
     public void deleteById() {
-        appUserRepository.deleteById(1);
+        appUserService.deleteById(1);
     }
 }

@@ -1,6 +1,5 @@
 package com.capstone.projectname.plan;
 
-import com.capstone.projectname.appUser.AppUser;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +16,7 @@ public class PlanController {
     public PlanController(PlanRepository planRepository) {
         this.planRepository = planRepository;
     }
+    
     
     @GetMapping("/find-plan")
     public List<Plan> findAll() {
