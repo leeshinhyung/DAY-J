@@ -16,8 +16,6 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 class SecurityConfiguration {
-    // LDAP or Database
-    // In Memory
     
     @Bean
     public InMemoryUserDetailsManager createUserDetailsManager() {
