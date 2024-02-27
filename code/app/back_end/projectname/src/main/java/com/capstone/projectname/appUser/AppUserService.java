@@ -18,29 +18,29 @@ public class AppUserService {
         appUsers.add(new AppUser(++appUsersCount, "name", "wdferlkasd", true, true, true, true, "what"));
     }
     
-    public AppUser createUser(AppUser user) {
+    public AppUser createAppUser(AppUser user) {
         user.setId(++appUsersCount);
         appUsers.add(user);
         return user;
     }
     
-    public List<AppUser> readAllUser() {
+    public List<AppUser> readAllAppUser() {
         return appUsers;
     }
     
-    public AppUser readUserById(int id) {
+    public AppUser readAppUserById(int id) {
         Predicate<? super AppUser> predicate = appUser -> appUser.getId() == id;
         return appUsers.stream().filter(predicate).findFirst().orElse(null);
     }
     
-    public void updateUser(AppUser appUser) {
+    public void updateAppUser(AppUser appUser) {
         Predicate<? super AppUser> predicate = user -> user.getId() == appUser.getId();
         AppUser prevAppUser = appUsers.stream().filter(predicate).findFirst().orElse(null);
         appUsers.remove(prevAppUser);
         appUsers.add(appUser);
     }
     
-    public void deleteUserById(int id) {
+    public void deleteAppUserById(int id) {
         Predicate<? super AppUser> predicate = appUser -> appUser.getId() == id;
         appUsers.removeIf(predicate);
     }
