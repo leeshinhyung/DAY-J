@@ -7,6 +7,7 @@ import org.hibernate.annotations.ColumnDefault;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
 
 @Entity
 public class Plan {
@@ -20,8 +21,8 @@ public class Plan {
     private boolean isComplete;
 
     @Column(nullable = false)
-    private Date planAlarmDate;
-    private Date planCreateDate;
+    private LocalDate planAlarmDate;
+    private LocalDate planCreateDate;
     
     @Column(nullable = false)
     private String planTag;
@@ -34,13 +35,13 @@ public class Plan {
     private Time planTime;
 
     @Column(nullable = false)
-    private Date planDay;
+    private LocalDate planDay;
 
 
     public Plan() {
     }
 
-    public Plan(int planId, boolean isComplete, Date planAlarmDate, Date planCreateDate, String planTag, String goal, String planPhoto, Time planTime, Date planDay) {
+    public Plan(int planId, boolean isComplete, LocalDate planAlarmDate, LocalDate planCreateDate, String planTag, String goal, String planPhoto, Time planTime, LocalDate planDay) {
         this.planId = planId;
         this.isComplete = isComplete;
         this.planAlarmDate = planAlarmDate;
@@ -69,19 +70,19 @@ public class Plan {
         this.isComplete = isComplete;
     }
 
-    public Date getPlanAlarmDate() {
+    public LocalDate getPlanAlarmDate() {
         return planAlarmDate;
     }
 
-    public void setPlanAlarmDate(Date planAlarmDate) {
+    public void setPlanAlarmDate(LocalDate planAlarmDate) {
         this.planAlarmDate = planAlarmDate;
     }
 
-    public Date getPlanCreateDate() {
+    public LocalDate getPlanCreateDate() {
         return planCreateDate;
     }
 
-    public void setPlanCreateDate(Date planCreateDate) {
+    public void setPlanCreateDate(LocalDate planCreateDate) {
         this.planCreateDate = planCreateDate;
     }
 
@@ -116,11 +117,11 @@ public class Plan {
     public void setPlanTime(Time planTime) {
         this.planTime = planTime;
     }
-    public Date getPlanDay() {
+    public LocalDate getPlanDay() {
         return planDay;
     }
 
-    public void setPlanDay(Date planDay) {
+    public void setPlanDay(LocalDate planDay) {
         this.planDay = planDay;
     }
 
