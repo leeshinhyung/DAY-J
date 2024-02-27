@@ -9,6 +9,7 @@ import java.util.function.Predicate;
 
 @Service
 public class AppUserService {
+    private AppUserRepository appUserRepository;
     private static List<AppUser> appUsers = new ArrayList<>();
     private static int appUsersCount = 0;
     

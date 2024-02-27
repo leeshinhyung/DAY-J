@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 public class AppUserController {
-    AppUserService appUserService;
+    private AppUserService appUserService;
     
     public AppUserController(AppUserService appUserService) {
         this.appUserService = appUserService;

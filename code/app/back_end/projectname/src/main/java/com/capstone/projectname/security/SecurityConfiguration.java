@@ -16,15 +16,6 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 class SecurityConfiguration {
-    
-    @Bean
-    public InMemoryUserDetailsManager createUserDetailsManager() {
-        UserDetails userDetails1 = createNewUser("DNA", "dummy");
-        UserDetails userDetails2 = createNewUser("goodgood", "dummy");
-        
-        return new InMemoryUserDetailsManager(userDetails1, userDetails2);
-    }
-    
     private UserDetails createNewUser(String username, String password) {
         Function<String, String> passwordEncoder
                 = input -> passwordEncoder().encode(input);
