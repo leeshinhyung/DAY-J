@@ -1,5 +1,6 @@
 package com.capstone.projectname.post;
 
+import jakarta.persistence.*;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -14,7 +15,7 @@ import java.time.LocalDate;
 @Entity
 public class Post {
     @Id
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
     @Column(nullable = false)
@@ -34,6 +35,8 @@ public class Post {
     @Column(nullable = false)
     @ColumnDefault("1")
     private boolean postIsAnonymous;
+    @Column(nullable = false)
+    @ColumnDefault("1")
     private boolean commentIsAnonymous;
 
     @Column(nullable = false)

@@ -8,7 +8,7 @@ public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
+
     @Column(nullable = false)
     private String nickname;
     @Column(nullable = false)
