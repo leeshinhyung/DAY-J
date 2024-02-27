@@ -11,29 +11,36 @@ import java.util.function.Predicate;
 public class AppUserService {
     private static List<AppUser> appUsers = new ArrayList<>();
     private static int appUsersCount = 0;
-
-    static{
+    
+    static {
         appUsers.add(new AppUser(++appUsersCount, "name", "umm", true, true, true, true, "what"));
         appUsers.add(new AppUser(++appUsersCount, "name", "sdlkjwe", true, true, true, true, "what"));
         appUsers.add(new AppUser(++appUsersCount, "name", "wdferlkasd", true, true, true, true, "what"));
     }
     
-    public AppUser save(AppUser user) {
+    public AppUser createUser(AppUser user) {
         user.setId(++appUsersCount);
         appUsers.add(user);
         return user;
     }
-
-    public List<AppUser> findAll(){
+    
+    public List<AppUser> readAllUser() {
         return appUsers;
     }
     
-    public AppUser findOne(int id){
+    public AppUser readUserById(int id) {
         Predicate<? super AppUser> predicate = appUser -> appUser.getId() == id;
         return appUsers.stream().filter(predicate).findFirst().orElse(null);
     }
-
-    public void deleteById(int id){
+    
+    public void updateUser(AppUser appUser) {
+        Predicate<? super AppUser> predicate = user -> user.getId() == appUser.getId();
+        AppUser prevAppUser = appUsers.stream().filter(predicate).findFirst().orElse(null);
+        appUsers.remove(prevAppUser);
+        appUsers.add(appUser);
+    }
+    
+    public void deleteUserById(int id) {
         Predicate<? super AppUser> predicate = appUser -> appUser.getId() == id;
         appUsers.removeIf(predicate);
     }
