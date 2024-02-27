@@ -17,7 +17,7 @@ public class AppUserController {
     }
     
     @PostMapping("/appUser/create")
-    public ResponseEntity<AppUser> create(@Valid @RequestBody AppUser appUser) {
+    public ResponseEntity<AppUser> createAppUser(@Valid @RequestBody AppUser appUser) {
         AppUser savedAppUser = appUserService.createUser(appUser);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -27,27 +27,27 @@ public class AppUserController {
     }
     
     @GetMapping("/appUser/read")
-    public List<AppUser> readAllUser() {
+    public List<AppUser> readAllAppUser() {
         return appUserService.readAllUser();
     }
     
     @GetMapping("/appUser/read/{id}")
-    public AppUser readUserById(@PathVariable int id) {
+    public AppUser readAppUserById(@PathVariable int id) {
         return appUserService.readUserById(id);
     }
     
     @GetMapping("/appUser/update/{id}")
-    public AppUser updateUserView(@PathVariable int id) {
+    public AppUser updateAppUserView(@PathVariable int id) {
         return appUserService.readUserById(id);
     }
     
     @PatchMapping("/appUser/update/{id}")
-    public void patchUser(@Valid @RequestBody AppUser appUser) {
+    public void patchAppUser(@Valid @RequestBody AppUser appUser) {
         appUserService.updateUser(appUser);
     }
     
     @DeleteMapping("/appUser/delete/{id}")
-    public void deleteUserById(@PathVariable int id) {
+    public void deleteAppUserById(@PathVariable int id) {
         appUserService.deleteUserById(id);
     }
 }
