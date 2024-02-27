@@ -9,7 +9,6 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Id
     @Column(nullable = false)
     private String nickname;
     @Column(nullable = false)

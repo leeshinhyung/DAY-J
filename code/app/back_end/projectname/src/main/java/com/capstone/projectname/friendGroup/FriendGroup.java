@@ -1,15 +1,13 @@
 package com.capstone.projectname.friendGroup;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 public class FriendGroup {
     
     @Id
-    @Column(nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int groupId;
     
     @Column(nullable = false)

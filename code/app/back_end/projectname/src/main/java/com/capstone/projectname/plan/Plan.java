@@ -1,8 +1,6 @@
 package com.capstone.projectname.plan;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDate;
@@ -11,7 +9,7 @@ import java.time.LocalDate;
 public class Plan {
     
     @Id
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
     @Column(nullable = false)
@@ -20,10 +18,12 @@ public class Plan {
     
     @Column(nullable = false)
     private LocalDate planAlarmDate;
+    @Column(nullable = false)
     private LocalDate planCreateDate;
     
     @Column(nullable = false)
     private String planTag;
+    @Column(nullable = false)
     private String goal;
     
     @Column(nullable = true)
