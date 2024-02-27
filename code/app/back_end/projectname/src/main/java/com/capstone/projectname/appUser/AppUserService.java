@@ -14,7 +14,6 @@ public class AppUserService {
     private static int appUsersCount = 0;
     
     static {
-        appUsers.add(new AppUser(++appUsersCount, "name", "umm", true, true, true, true, "what"));
         appUsers.add(new AppUser(++appUsersCount, "name", "sdlkjwe", true, true, true, true, "what"));
         appUsers.add(new AppUser(++appUsersCount, "name", "wdferlkasd", true, true, true, true, "what"));
     }

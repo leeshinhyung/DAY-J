@@ -1,17 +1,16 @@
 package com.capstone.projectname.appUser;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 public class AppUser {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Id
+    @Column(nullable = false)
     private String nickname;
     @Column(nullable = false)
     private String password;
@@ -19,8 +18,14 @@ public class AppUser {
     @Column(nullable = false)
     @ColumnDefault("1")
     private boolean friendGroupAlarm;
+    @Column(nullable = false)
+    @ColumnDefault("1")
     private boolean planAlarm;
+    @Column(nullable = false)
+    @ColumnDefault("1")
     private boolean postAlarm;
+    @Column(nullable = false)
+    @ColumnDefault("1")
     private boolean appAlarm;
 
     @Column(nullable = false)
