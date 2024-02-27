@@ -1,42 +1,44 @@
 package com.capstone.projectname.friendGroup;
 
-import com.capstone.projectname.appUser.AppUser;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.capstone.projectname.post.Post;
-
+import java.net.URI;
 import java.util.List;
 
 @RestController
 public class FriendGroupController {
-    FriendGroupRepository friendGroupRepository;
+    FriendGroupService friendGroupService;
     
     
-    public FriendGroupController(FriendGroupRepository friendGroupRepository) {
-        this.friendGroupRepository = friendGroupRepository;
+    public FriendGroupController(FriendGroupService friendGroupService) {
+        this.friendGroupService = friendGroupService;
     }
     
     @GetMapping("/find-friendGroup")
     public List<FriendGroup> findAll() {
-        return friendGroupRepository.findAll();
+        return friendGroupService.findAll();
     }
     
-    @GetMapping("/find-friendGroup-id")
+    @GetMapping("/find-friendGroup/{id}")
     public FriendGroup findById() {
-        return friendGroupRepository.findById(1).get();
-    }
-    
-    @GetMapping("/delete-friendGroup-id")
-    public void deleteById() {
-    	friendGroupRepository.deleteById(1);
+        return friendGroupService.findOne(1);
     }
 
-    @PostMapping("/update-friendGroup")
-    public void update(@Valid @RequestBody FriendGroup friendGroup) {
-        FriendGroup savedFriendGroup = friendGroupRepository.save(friendGroup);
+    @PostMapping("/create-friendGroup")
+    public ResponseEntity<FriendGroup> create(@Valid @RequestBody FriendGroup friendGroup) {
+        FriendGroup savedFriendGroup = friendGroupService.save(friendGroup);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedFriendGroup.getGroupId())
+                .toUri();
+        return ResponseEntity.created(location).build();
+    }
+
+    @DeleteMapping("/delete-friendGroup/{id}")
+    public void deleteById() {
+        friendGroupService.deleteById(1);
     }
 }
