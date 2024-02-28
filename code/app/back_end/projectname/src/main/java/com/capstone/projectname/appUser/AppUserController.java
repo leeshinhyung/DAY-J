@@ -1,29 +1,21 @@
 package com.capstone.projectname.appUser;
 
 import jakarta.validation.Valid;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
 public class AppUserController {
-    private AppUserService appUserService;
+    AppUserService appUserService;
     
     public AppUserController(AppUserService appUserService) {
         this.appUserService = appUserService;
     }
     
     @PostMapping("/appUser/create")
-    public ResponseEntity<AppUser> createAppUser(@Valid @RequestBody AppUser appUser) {
-        AppUser savedAppUser = appUserService.createAppUser(appUser);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(savedAppUser.getId())
-                .toUri();
-        return ResponseEntity.created(location).build();
+    public void createAppUser(@Valid @RequestBody AppUser appUser) {
+        appUserService.createAppUser(appUser);
     }
     
     @GetMapping("/appUser/read")

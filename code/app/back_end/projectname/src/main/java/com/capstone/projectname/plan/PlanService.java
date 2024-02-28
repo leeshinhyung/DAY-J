@@ -1,6 +1,5 @@
 package com.capstone.projectname.plan;
 
-import com.capstone.projectname.appUser.AppUser;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
