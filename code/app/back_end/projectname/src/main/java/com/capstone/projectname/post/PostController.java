@@ -1,11 +1,8 @@
 package com.capstone.projectname.post;
 
 import jakarta.validation.Valid;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -17,13 +14,8 @@ public class PostController {
     }
     
     @PostMapping("/post/create")
-    public ResponseEntity<Post> createPost(@Valid @RequestBody Post post) {
-        Post savedPost = postService.createPost(post);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(savedPost.getId())
-                .toUri();
-        return ResponseEntity.created(location).build();
+    public void createPost(@Valid @RequestBody Post post) {
+        postService.createPost(post);
     }
     
     @GetMapping("/post/read")
@@ -35,12 +27,12 @@ public class PostController {
     public Post readPostById(@PathVariable int id) {
         return postService.readPostById(id);
     }
-
+    
     @GetMapping("/post/update/{id}")
     public Post updatePostView(@PathVariable int id) {
         return postService.readPostById(id);
     }
-
+    
     @PatchMapping("/post/update/{id}")
     public void patchPost(@Valid @RequestBody Post post) {
         postService.updatePost(post);

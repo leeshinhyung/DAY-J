@@ -1,11 +1,8 @@
 package com.capstone.projectname.plan;
 
 import jakarta.validation.Valid;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -17,13 +14,8 @@ public class PlanController {
     }
     
     @PostMapping("/plan/create")
-    public ResponseEntity<Plan> createPlan(@Valid @RequestBody Plan plan) {
-        Plan savedPlan = planService.createPlan(plan);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(savedPlan.getId())
-                .toUri();
-        return ResponseEntity.created(location).build();
+    public void createPlan(@Valid @RequestBody Plan plan) {
+        planService.createPlan(plan);
     }
     
     @GetMapping("/plan/read")
@@ -35,17 +27,17 @@ public class PlanController {
     public Plan readPlanById(@PathVariable int id) {
         return planService.readPlanById(id);
     }
-
+    
     @GetMapping("/plan/update/{id}")
     public Plan updatePlanView(@PathVariable int id) {
         return planService.readPlanById(id);
     }
-
+    
     @PatchMapping("/plan/update/{id}")
     public void patchPlan(@Valid @RequestBody Plan plan) {
         planService.updatePlan(plan);
     }
-
+    
     @DeleteMapping("/plan/delete/{id}")
     public void deletePlanById(@PathVariable int id) {
         planService.deletePlanById(id);
