@@ -1,6 +1,5 @@
 package com.capstone.projectname.post;
 
-import com.capstone.projectname.appUser.AppUser;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

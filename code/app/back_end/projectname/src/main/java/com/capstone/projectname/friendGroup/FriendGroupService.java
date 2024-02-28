@@ -1,6 +1,5 @@
 package com.capstone.projectname.friendGroup;
 
-import com.capstone.projectname.appUser.AppUser;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
