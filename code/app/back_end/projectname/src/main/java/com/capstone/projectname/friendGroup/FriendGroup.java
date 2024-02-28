@@ -1,9 +1,11 @@
 package com.capstone.projectname.friendGroup;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
 
 @Entity
+@Data
 public class FriendGroup {
     
     @Id
@@ -19,57 +21,4 @@ public class FriendGroup {
 	@Column(nullable = false)
 	@ColumnDefault("0")
 	private boolean groupExit;
-
-    public FriendGroup() {
-    	
-    }
-
-	public FriendGroup(int groupId, String groupName, String groupGoal, boolean groupExit) {
-		this.groupId = groupId;
-		this.groupName = groupName;
-		this.groupGoal = groupGoal;
-		this.groupExit = groupExit;
-	}
-
-	public int getGroupId() {
-		return groupId;
-	}
-
-	public void setGroupId(int groupId) {
-		this.groupId = groupId;
-	}
-
-	public String getGroupName() {
-		return groupName;
-	}
-
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
-	}
-
-	public String getGroupGoal() {
-		return groupGoal;
-	}
-
-	public void setGroupGoal(String groupGoal) {
-		this.groupGoal = groupGoal;
-	}
-
-	public boolean isGroupExit() {
-		return groupExit;
-	}
-
-	public void setGroupExit(boolean groupExit) {
-		this.groupExit = groupExit;
-	}
-
-	@Override
-	public String toString() {
-		return "FriendGroup{" +
-				"groupId=" + groupId +
-				", groupName='" + groupName + '\'' +
-				", groupGoal='" + groupGoal + '\'' +
-				", groupExit=" + groupExit +
-				'}';
-	}
 }
