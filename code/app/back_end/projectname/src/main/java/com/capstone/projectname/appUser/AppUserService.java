@@ -7,7 +7,7 @@ import java.util.List;
 
 @Service
 public class AppUserService {
-    private static AppUserRepository appUserRepository;
+    private AppUserRepository appUserRepository;
     
     public AppUserService(AppUserRepository appUserRepository) {
         this.appUserRepository = appUserRepository;

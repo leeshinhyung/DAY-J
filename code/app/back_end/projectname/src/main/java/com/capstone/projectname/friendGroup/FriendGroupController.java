@@ -18,13 +18,8 @@ public class FriendGroupController {
     }
     
     @PostMapping("/friendGroup/create")
-    public ResponseEntity<FriendGroup> createFriendGroup(@Valid @RequestBody FriendGroup friendGroup) {
-        FriendGroup savedFriendGroup = friendGroupService.createFriendGroup(friendGroup);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(savedFriendGroup.getGroupId())
-                .toUri();
-        return ResponseEntity.created(location).build();
+    public void createFriendGroup(@Valid @RequestBody FriendGroup friendGroup) {
+        friendGroupService.createFriendGroup(friendGroup);
     }
     
     @GetMapping("/friendGroup/read")
