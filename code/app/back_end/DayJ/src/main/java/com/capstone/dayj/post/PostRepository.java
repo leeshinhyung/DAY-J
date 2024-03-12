@@ -1,8 +1,9 @@
-package com.capstone.projectname.plan;
+package com.capstone.dayj.post;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PlanRepository extends JpaRepository<Plan, Integer> {
+public interface PostRepository extends JpaRepository<Post, Integer> {
+
 }
