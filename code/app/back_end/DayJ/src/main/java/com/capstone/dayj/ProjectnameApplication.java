@@ -1,4 +1,4 @@
-package com.capstone.projectname;
+package com.capstone.dayj;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
