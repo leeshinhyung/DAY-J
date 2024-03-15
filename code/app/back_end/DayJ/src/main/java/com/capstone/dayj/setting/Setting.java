@@ -1,4 +1,5 @@
-package com.capstone.dayj.plan;
+package com.capstone.dayj.setting;
+
 
 import com.capstone.dayj.appUser.AppUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -6,41 +7,40 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
 
-import java.time.LocalDate;
-
 @Entity
 @Data
-public class Plan {
-    
+public class Setting {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(nullable = false)
+    private String nickname;
+
+//    @OneToOne
+//    @JoinColumn(name = "user_id")
 //    @JsonIgnore
 //    private AppUser appUser;
 
     @Column(nullable = false)
     @ColumnDefault("0")
-    private boolean isComplete;
-    
-    @Column(nullable = false)
-    private LocalDate planAlarmDate;
-    @Column(nullable = false)
-    private LocalDate planCreateDate;
-    
-    @Column(nullable = false)
-    private String planTag;
-    @Column(nullable = false)
-    private String goal;
-    
-    @Column(nullable = true)
-    private String planPhoto;
-    
-    @Column(nullable = false)
-    private LocalDate planTime;
-    
-    @Column(nullable = false)
-    private LocalDate planDay;
-}
+    private boolean planAlarm;
 
+    @Column(nullable = false)
+    @ColumnDefault("0")
+    private boolean friendGroupAlarm;
+
+    @Column(nullable = false)
+    @ColumnDefault("0")
+    private boolean postAlarm;
+
+    @Column(nullable = false)
+    @ColumnDefault("0")
+    private boolean appAlarm;
+
+    @Column(nullable = false)
+    private String profilePhoto;
+
+
+}

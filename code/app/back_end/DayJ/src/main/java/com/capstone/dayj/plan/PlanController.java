@@ -7,7 +7,7 @@ import java.util.List;
 
 @RestController
 public class PlanController {
-    PlanService planService;
+    private PlanService planService;
     
     public PlanController(PlanService planService) {
         this.planService = planService;

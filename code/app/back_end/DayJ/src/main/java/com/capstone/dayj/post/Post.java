@@ -1,8 +1,11 @@
 package com.capstone.dayj.post;
 
+import com.capstone.dayj.appUser.AppUser;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 
@@ -12,7 +15,11 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
+
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JsonIgnore
+//    private AppUser appUser;
+
     @Column(nullable = false)
     private int postView;
     private int postLike;
