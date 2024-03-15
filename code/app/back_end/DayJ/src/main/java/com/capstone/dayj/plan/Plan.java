@@ -17,6 +17,7 @@ public class Plan {
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id", referencedColumnName = "id")
     @JsonIgnore
     private AppUser appUser;
 
