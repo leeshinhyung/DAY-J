@@ -16,9 +16,9 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JsonIgnore
-//    private AppUser appUser;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private AppUser appUser;
 
     @Column(nullable = false)
     private int postView;

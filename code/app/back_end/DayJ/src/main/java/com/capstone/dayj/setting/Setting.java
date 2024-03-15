@@ -18,10 +18,9 @@ public class Setting {
     @Column(nullable = false)
     private String nickname;
 
-//    @OneToOne
-//    @JoinColumn(name = "user_id")
-//    @JsonIgnore
-//    private AppUser appUser;
+    @OneToOne(mappedBy = "setting")
+    @JsonIgnore
+    private AppUser appUser;
 
     @Column(nullable = false)
     @ColumnDefault("0")
