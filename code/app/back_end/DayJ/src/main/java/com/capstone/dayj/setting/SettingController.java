@@ -17,7 +17,7 @@ public class SettingController {
         this.appUserService = appUserService;
     }
     
-    @GetMapping("/user/{id}/setting")
+    @GetMapping("/appUser/read/{id}/setting")
     public Setting readSettingForUser(@PathVariable int id) {
         AppUser appUser = appUserService.readAppUserById(id);
         return appUser.getSetting();

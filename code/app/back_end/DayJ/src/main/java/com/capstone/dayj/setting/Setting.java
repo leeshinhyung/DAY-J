@@ -18,7 +18,8 @@ public class Setting {
     @Column(nullable = false)
     private String nickname;
 
-    @OneToOne(mappedBy = "setting")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id", referencedColumnName = "id")
     @JsonIgnore
     private AppUser appUser;
 
