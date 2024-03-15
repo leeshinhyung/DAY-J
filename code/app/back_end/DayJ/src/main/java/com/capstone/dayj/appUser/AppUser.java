@@ -1,5 +1,6 @@
 package com.capstone.dayj.appUser;
 
+import com.capstone.dayj.appUserFriendGroup.AppUserFriendGroup;
 import com.capstone.dayj.friendGroup.FriendGroup;
 import com.capstone.dayj.plan.Plan;
 import com.capstone.dayj.post.Post;
@@ -20,22 +21,22 @@ public class AppUser {
     @Column(nullable = false)
     private String password;
 
-//    @ManyToMany(mappedBy = "appUsers")
-//    @JsonIgnore
-//    private List<FriendGroup> friendGroups;
+    @OneToMany(mappedBy = "appUser")
+    @JsonIgnore
+    private List<AppUserFriendGroup> appUserFriendGroups;
+    
+    @OneToMany(mappedBy = "appUser")
+    @JsonIgnore
+    private List<Plan> plans;
 
-//    @OneToMany(mappedBy = "appUser")
-//    @JsonIgnore
-//    private List<Plan> plans;
-//
-//    @OneToMany(mappedBy = "appUser")
-//    @JsonIgnore
-//    private List<Post> posts;
+    @OneToMany(mappedBy = "appUser")
+    @JsonIgnore
+    private List<Post> posts;
 
 
-//    @OneToOne(mappedBy = "appUser")
-//    @JsonIgnore
-//    private Setting setting;
+    @OneToOne
+    @JsonIgnore
+    private Setting setting;
 }
 
     
