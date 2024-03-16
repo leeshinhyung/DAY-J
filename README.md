@@ -1,4 +1,4 @@
-<img src="https://github.com/DAY-J/DAY-J/assets/102334596/66adb03c-1ff6-4b83-a6c3-f101b7b00893" width="1000" height="200"><br><br>
+<img src="https://github.com/DAY-J/DAY-J/assets/102334596/66adb03c-1ff6-4b83-a6c3-f101b7b00893" width="1200" height="200"><br><br>
 
 <img src="https://img.shields.io/badge/UI-%23121011?style=for-the-badge"><img src="https://img.shields.io/badge/Zeplin-4E5EE4?style=for-the-badge&logo=openzeppelin&logoColor=white"><img src="https://img.shields.io/badge/version x.xx-515151?style=for-the-badge"><br>
 <img src="https://img.shields.io/badge/FrontEnd-%23121011?style=for-the-badge"><img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white"><img src="https://img.shields.io/badge/version x.xx-515151?style=for-the-badge">
