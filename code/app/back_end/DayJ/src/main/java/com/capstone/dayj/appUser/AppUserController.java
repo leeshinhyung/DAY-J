@@ -1,5 +1,6 @@
 package com.capstone.dayj.appUser;
 
+import com.capstone.dayj.plan.Plan;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +27,12 @@ public class AppUserController {
     @GetMapping("/appUser/read/{id}")
     public AppUser readAppUserById(@PathVariable int id) {
         return appUserService.readAppUserById(id);
+    }
+    
+    @GetMapping("/appUser/read/{id}/plan")
+    public List<Plan> readPlanForAppUser(@PathVariable int id) {
+        AppUser appUser = appUserService.readAppUserById(id);
+        return appUser.getPlans();
     }
     
     @GetMapping("/appUser/update/{id}")

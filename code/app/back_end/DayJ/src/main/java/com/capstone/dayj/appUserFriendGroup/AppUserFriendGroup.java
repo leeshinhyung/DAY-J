@@ -14,10 +14,12 @@ public class AppUserFriendGroup {
     private int id;
     
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id", referencedColumnName = "id")
     @JsonIgnore
     private AppUser appUser;
     
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="friend_group_id", referencedColumnName = "id")
     @JsonIgnore
     private FriendGroup friendGroup;
 }
