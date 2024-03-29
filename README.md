@@ -18,9 +18,8 @@
 
 <div align="center">
   
-  |<img src='https://avatars.githubusercontent.com/u/88303084?s=70&v=4' height=100 width=100px></img>|<img src='https://avatars.githubusercontent.com/u/102334596?v=4' height=100 width=100px></img>|<img src='https://avatars.githubusercontent.com/u/113335358?s=70&v=4' height=100 width=100px></img>|<img src='https://avatars.githubusercontent.com/u/63306779?s=70&v=4' height=100 width=100px></img>|<img src='https://avatars.githubusercontent.com/u/127875291?s=70&v=4' height=100 width=100px></img>|
-  |  :---:  |  :---:  |  :---:  |  :---:  |  :---:  |
+  |<img src='https://avatars.githubusercontent.com/u/88303084?s=70&v=4' height=100 width=100px></img>|<img src='https://avatars.githubusercontent.com/u/102334596?v=4' height=100 width=100px></img>|<img src='https://avatars.githubusercontent.com/u/113335358?s=70&v=4' height=100 width=100px></img>|<img src='https://avatars.githubusercontent.com/u/63306779?s=70&v=4' height=100 width=100px></img>|<img src='https://avatars.githubusercontent.com/u/127875291?s=70&v=4' height=100 width=100px></img>|<img src='https://avatars.githubusercontent.com/u/127875291?v=4' height=100 width=100px></img>|
+  |  :---:  |  :---:  |  :---:  |  :---:  |  :---:  | :---: |
   | [김채형](https://github.com/cherry7680) | [변성훈](https://github.com/DNA-B) | [이신형](https://github.com/leeshinhyung) | [문지영](https://github.com/jiyoung0270) | [오소영](https://github.com/ohsoyoungg) | [신재호](https://github.com/Jaeho5735) |
 
 </div>
-
