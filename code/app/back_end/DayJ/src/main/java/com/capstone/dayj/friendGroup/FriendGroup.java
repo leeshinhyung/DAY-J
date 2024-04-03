@@ -23,7 +23,7 @@ public class FriendGroup {
     @Column
     private String groupGoal;
     
-    @Column
+    @Column(nullable = false)
     private String groupName;
     
     @Column(nullable = false)
