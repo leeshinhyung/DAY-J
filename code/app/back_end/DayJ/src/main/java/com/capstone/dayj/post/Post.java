@@ -17,7 +17,7 @@ public class Post {
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id", referencedColumnName = "id")
+    @JoinColumn(name="app_user_id", referencedColumnName = "id")
     @JsonIgnore
     private AppUser appUser;
 
