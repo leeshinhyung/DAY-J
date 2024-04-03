@@ -5,9 +5,11 @@ import com.capstone.dayj.plan.Plan;
 import com.capstone.dayj.post.Post;
 import com.capstone.dayj.setting.Setting;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,8 +23,9 @@ public class AppUser {
     private String password;
     
     @OneToMany(mappedBy = "appUser")
+    @JsonManagedReference
     @JsonIgnore
-    private List<AppUserFriendGroup> appUserFriendGroups;
+    private List<AppUserFriendGroup> appUserFriendGroup;
     
     @OneToMany(mappedBy = "appUser")
     @JsonIgnore

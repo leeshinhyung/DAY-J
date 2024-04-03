@@ -22,7 +22,6 @@ public class PlanService {
     }
 
     public Plan readPlanById(int id) {
-
         Optional<Plan> plan = planRepository.findById(id);
 
         if (plan.isEmpty())

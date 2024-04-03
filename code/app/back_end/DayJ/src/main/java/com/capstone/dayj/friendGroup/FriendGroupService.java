@@ -25,7 +25,7 @@ public class FriendGroupService {
         Optional<FriendGroup> friendGroup = friendGroupRepository.findById(id);
         
         if (friendGroup.isEmpty())
-            throw new RuntimeException("해당 id를 가진 Group이 없습니다.");
+            throw new FriendGroupNotFoundException("해당 id를 가진 그룹이 없습니다.");
         
         return friendGroup.get();
     }
