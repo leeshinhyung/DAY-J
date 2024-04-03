@@ -22,7 +22,7 @@ public class Plan {
     private AppUser appUser;
 
     @Column(nullable = false)
-    @ColumnDefault("0")
+    @ColumnDefault("false")
     private boolean isComplete;
     
     @Column(nullable = false)
@@ -43,5 +43,8 @@ public class Plan {
     
     @Column(nullable = false)
     private LocalDate planDay;
+
+    @Column(nullable = true)
+    private boolean isPublic;
 }
 
