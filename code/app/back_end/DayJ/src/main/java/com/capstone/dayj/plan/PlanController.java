@@ -6,34 +6,35 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/plan")
 public class PlanController {
     private PlanService planService;
-    
+
     public PlanController(PlanService planService) {
         this.planService = planService;
     }
-    
-    @PostMapping("/plan")
+
+    @PostMapping
     public void createPlan(@Valid @RequestBody Plan plan) {
         planService.createPlan(plan);
     }
-    
-    @GetMapping("/plan")
+
+    @GetMapping
     public List<Plan> readAllPlan() {
         return planService.readAllPlan();
     }
-    
-    @GetMapping("/plan/{id}")
+
+    @GetMapping("/{id}")
     public Plan readPlanById(@PathVariable int id) {
         return planService.readPlanById(id);
     }
 
-    @PatchMapping("/plan/{id}")
+    @PatchMapping("/{id}")
     public void patchPlan(@Valid @RequestBody Plan plan) {
         planService.updatePlan(plan);
     }
-    
-    @DeleteMapping("/plan/{id}")
+
+    @DeleteMapping("/{id}")
     public void deletePlanById(@PathVariable int id) {
         planService.deletePlanById(id);
     }
