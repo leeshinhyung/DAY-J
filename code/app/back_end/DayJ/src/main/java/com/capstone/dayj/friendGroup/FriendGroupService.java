@@ -3,6 +3,7 @@ package com.capstone.dayj.friendGroup;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FriendGroupService {
@@ -21,7 +22,12 @@ public class FriendGroupService {
     }
     
     public FriendGroup readFriendGroupById(int id) {
-        return friendGroupRepository.findById(id).get();
+        Optional<FriendGroup> friendGroup = friendGroupRepository.findById(id);
+        
+        if (friendGroup.isEmpty())
+            throw new RuntimeException("해당 id를 가진 Group이 없습니다.");
+        
+        return friendGroup.get();
     }
     
     public void updateFriendGroup(FriendGroup friendGroup) {

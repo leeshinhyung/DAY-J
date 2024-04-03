@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/friendGroup")
 public class FriendGroupController {
     FriendGroupService friendGroupService;
     
@@ -14,33 +15,28 @@ public class FriendGroupController {
         this.friendGroupService = friendGroupService;
     }
     
-    @PostMapping("/friendGroup/create")
+    @PostMapping
     public void createFriendGroup(@Valid @RequestBody FriendGroup friendGroup) {
         friendGroupService.createFriendGroup(friendGroup);
     }
     
-    @GetMapping("/friendGroup/read")
+    @GetMapping
     public List<FriendGroup> readAllFriendGroup() {
         return friendGroupService.readAllFriendGroup();
     }
     
-    @GetMapping("/friendGroup/read/{id}")
+    @GetMapping("/{id}")
     public FriendGroup readFriendGroupById(@PathVariable int id) {
         return friendGroupService.readFriendGroupById(id);
     }
     
-    @GetMapping("/friendGroup/update/{id}")
-    public FriendGroup updateFriendGroupView(@PathVariable int id) {
-        return friendGroupService.readFriendGroupById(id);
-    }
-
-    @PatchMapping("/friendGroup/update/{id}")
+    @PatchMapping("/{id}")
     public void patchFriendGroup(@Valid @RequestBody FriendGroup friendGroup) {
         friendGroupService.updateFriendGroup(friendGroup);
     }
-
-    @DeleteMapping("/friendGroup/delete/{id}")
+    
+    @DeleteMapping("/{id}")
     public void deleteFriendGroupById(@PathVariable int id) {
-       friendGroupService.deleteFriendGroupById(id);
+        friendGroupService.deleteFriendGroupById(id);
     }
 }
