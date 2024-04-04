@@ -22,7 +22,7 @@ public class Plan {
     private AppUser appUser;
 
     @Column(nullable = false)
-    @ColumnDefault("0")
+    @ColumnDefault("false")
     private boolean isComplete;
     
     @Column(nullable = false)
