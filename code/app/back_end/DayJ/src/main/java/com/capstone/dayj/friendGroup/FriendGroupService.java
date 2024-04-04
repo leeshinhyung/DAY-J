@@ -21,17 +21,17 @@ public class FriendGroupService {
         return friendGroupRepository.findAll();
     }
     
-    public FriendGroup readFriendGroupById(int id) {
-        Optional<FriendGroup> friendGroup = friendGroupRepository.findById(id);
-        
-        if (friendGroup.isEmpty())
-            throw new FriendGroupNotFoundException("해당 id를 가진 그룹이 없습니다.");
-        
-        return friendGroup.get();
+    public Optional<FriendGroup> readFriendGroupById(int id) {
+        return Optional.ofNullable(friendGroupRepository.findById(id)
+                .orElseThrow(() -> new FriendGroupNotFoundException("해당 id를 가진 그룹이 없습니다.")));
     }
     
-    public void updateFriendGroup(FriendGroup friendGroup) {
-        friendGroupRepository.save(friendGroup);
+    public void updateFriendGroup(int id, FriendGroup friendGroup) {
+        FriendGroup existingFriendGroup = friendGroupRepository.findById(id)
+                .orElseThrow(() -> new FriendGroupNotFoundException("해당 id를 가진 그룹이 없습니다."));
+        
+        existingFriendGroup.setId(friendGroup.getId());
+        friendGroupRepository.save(existingFriendGroup);
     }
     
     public void deleteFriendGroupById(int id) {
