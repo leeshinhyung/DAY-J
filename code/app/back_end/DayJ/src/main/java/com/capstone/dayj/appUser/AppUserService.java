@@ -1,9 +1,11 @@
 package com.capstone.dayj.appUser;
 
 
+import com.capstone.dayj.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AppUserService {
@@ -21,12 +23,16 @@ public class AppUserService {
         return appUserRepository.findAll();
     }
     
-    public AppUser readAppUserById(int id) {
-        return appUserRepository.findById(id).get();
+    public Optional<AppUser> readAppUserById(int id) {
+        return appUserRepository.findById(id);
     }
     
-    public void updateAppUser(AppUser appUser) {
-        appUserRepository.save(appUser);
+    public void updateAppUser(AppUser appUser, int id) {
+        AppUser excistingAppUser = appUserRepository.findById(id).orElseThrow(() -> new NotFoundException());
+        excistingAppUser.setId(appUser.getId());
+        excistingAppUser.setPassword(appUser.getPassword());
+
+        appUserRepository.save(excistingAppUser);
     }
     
     public void deleteAppUserById(int id) {

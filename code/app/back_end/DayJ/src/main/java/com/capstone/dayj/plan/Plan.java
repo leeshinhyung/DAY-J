@@ -17,11 +17,12 @@ public class Plan {
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="app_user_id", referencedColumnName = "id")
     @JsonIgnore
     private AppUser appUser;
 
     @Column(nullable = false)
-    @ColumnDefault("0")
+    @ColumnDefault("false")
     private boolean isComplete;
     
     @Column(nullable = false)
@@ -34,7 +35,6 @@ public class Plan {
     @Column(nullable = false)
     private String goal;
     
-    @Column(nullable = true)
     private String planPhoto;
     
     @Column(nullable = false)
@@ -42,5 +42,9 @@ public class Plan {
     
     @Column(nullable = false)
     private LocalDate planDay;
+    
+    @Column(nullable = false)
+    @ColumnDefault("0")
+    private boolean isPublic;
 }
 

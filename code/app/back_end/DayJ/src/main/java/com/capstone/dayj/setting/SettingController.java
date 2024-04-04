@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 @RestController
 public class SettingController {
     private SettingService settingService;
@@ -17,9 +19,9 @@ public class SettingController {
         this.appUserService = appUserService;
     }
     
-    @GetMapping("/user/{id}/setting")
+    @GetMapping("/appUser/read/{id}/setting")
     public Setting readSettingForUser(@PathVariable int id) {
-        AppUser appUser = appUserService.readAppUserById(id);
-        return appUser.getSetting();
+        Optional<AppUser> appUser = appUserService.readAppUserById(id);
+        return appUser.get().getSetting();
     }
 }

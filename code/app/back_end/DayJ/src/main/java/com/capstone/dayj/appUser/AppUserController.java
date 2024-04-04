@@ -1,45 +1,43 @@
 package com.capstone.dayj.appUser;
-
+import com.capstone.dayj.exception.NotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/private/app-user")
 public class AppUserController {
     AppUserService appUserService;
     
     public AppUserController(AppUserService appUserService) {
         this.appUserService = appUserService;
     }
-    
-    @PostMapping("/appUser/create")
+
+    @PostMapping
     public void createAppUser(@Valid @RequestBody AppUser appUser) {
         appUserService.createAppUser(appUser);
     }
     
-    @GetMapping("/appUser/read")
+    @GetMapping
     public List<AppUser> readAllAppUser() {
         return appUserService.readAllAppUser();
     }
     
-    @GetMapping("/appUser/read/{id}")
+    @GetMapping("/{id}")
     public AppUser readAppUserById(@PathVariable int id) {
-        return appUserService.readAppUserById(id);
+        return appUserService.readAppUserById(id).orElseThrow(() -> new NotFoundException("Could not found user for " + id));
+   }
+
+    @PatchMapping("/{id}")
+    public void patchAppUser(@PathVariable int id, @Valid @RequestBody AppUser appUser) {
+        appUserService.updateAppUser(appUser, id);
     }
-    
-    @GetMapping("/appUser/update/{id}")
-    public AppUser updateAppUserView(@PathVariable int id) {
-        return appUserService.readAppUserById(id);
-    }
-    
-    @PatchMapping("/appUser/update/{id}")
-    public void patchAppUser(@Valid @RequestBody AppUser appUser) {
-        appUserService.updateAppUser(appUser);
-    }
-    
-    @DeleteMapping("/appUser/delete/{id}")
+    // 구글 자동로그인 & 회원가입할건데 필요없지 않나 ???
+
+    @DeleteMapping("/{id}")
     public void deleteAppUserById(@PathVariable int id) {
         appUserService.deleteAppUserById(id);
     }
+
 }
