@@ -1,5 +1,6 @@
 package com.capstone.dayj.exception;
 
+import com.capstone.dayj.appUser.AppUserNotFoundException;
 import com.capstone.dayj.friendGroup.FriendGroupNotFoundException;
 import com.capstone.dayj.plan.PlanNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,11 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     
     @ExceptionHandler(PlanNotFoundException.class)
     protected ResponseEntity<?> handlePlanNotFoundException(PlanNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(AppUserNotFoundException.class)
+    protected ResponseEntity<?> handleAppUserNotFoundException(AppUserNotFoundException ex){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 }

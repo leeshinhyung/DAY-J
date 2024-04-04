@@ -1,9 +1,9 @@
 package com.capstone.dayj.appUser;
-import com.capstone.dayj.exception.NotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/private/app-user")
@@ -25,15 +25,14 @@ public class AppUserController {
     }
     
     @GetMapping("/{id}")
-    public AppUser readAppUserById(@PathVariable int id) {
-        return appUserService.readAppUserById(id).orElseThrow(() -> new NotFoundException("Could not found user for " + id));
+    public Optional<AppUser> readAppUserById(@PathVariable int id) {
+        return appUserService.readAppUserById(id);
    }
 
     @PatchMapping("/{id}")
     public void patchAppUser(@PathVariable int id, @Valid @RequestBody AppUser appUser) {
         appUserService.updateAppUser(appUser, id);
     }
-    // 구글 자동로그인 & 회원가입할건데 필요없지 않나 ???
 
     @DeleteMapping("/{id}")
     public void deleteAppUserById(@PathVariable int id) {
