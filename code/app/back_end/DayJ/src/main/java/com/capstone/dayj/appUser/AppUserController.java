@@ -1,9 +1,9 @@
 package com.capstone.dayj.appUser;
+
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/private/app-user")
@@ -13,7 +13,7 @@ public class AppUserController {
     public AppUserController(AppUserService appUserService) {
         this.appUserService = appUserService;
     }
-
+    
     @PostMapping
     public void createAppUser(@Valid @RequestBody AppUser appUser) {
         appUserService.createAppUser(appUser);
@@ -25,18 +25,18 @@ public class AppUserController {
     }
     
     @GetMapping("/{id}")
-    public Optional<AppUser> readAppUserById(@PathVariable int id) {
-        return appUserService.readAppUserById(id);
-   }
-
+    public AppUser readAppUserById(@PathVariable int id) {
+        return appUserService.readAppUserById(id).get();
+    }
+    
     @PatchMapping("/{id}")
     public void patchAppUser(@PathVariable int id, @Valid @RequestBody AppUser appUser) {
-        appUserService.updateAppUser(appUser, id);
+        appUserService.updateAppUser(id, appUser);
     }
-
+    
     @DeleteMapping("/{id}")
     public void deleteAppUserById(@PathVariable int id) {
         appUserService.deleteAppUserById(id);
     }
-
+    
 }

@@ -27,12 +27,13 @@ public class AppUserService {
                 .orElseThrow(() -> new AppUserNotFoundException("해당 id를 가진 사용자가 없습니다.")));
     }
     
-    public void updateAppUser(AppUser appUser, int id) {
-        AppUser excistingAppUser = appUserRepository.findById(id)
+    public void updateAppUser(int id, AppUser appUser) {
+        AppUser existingAppUser = appUserRepository.findById(id)
                 .orElseThrow(() -> new AppUserNotFoundException("해당 id를 가진 사용자가 없습니다."));
-        excistingAppUser.setId(appUser.getId());
-        excistingAppUser.setPassword(appUser.getPassword());
-        appUserRepository.save(excistingAppUser);
+        
+        existingAppUser.setId(appUser.getId());
+        existingAppUser.setPassword(appUser.getPassword());
+        appUserRepository.save(existingAppUser);
     }
     
     public void deleteAppUserById(int id) {
