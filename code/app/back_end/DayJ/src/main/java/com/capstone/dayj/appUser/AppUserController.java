@@ -1,52 +1,42 @@
 package com.capstone.dayj.appUser;
-
-import com.capstone.dayj.plan.Plan;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
+@RequestMapping("/private/app-user")
 public class AppUserController {
     AppUserService appUserService;
     
     public AppUserController(AppUserService appUserService) {
         this.appUserService = appUserService;
     }
-    
-    @PostMapping("/appUser/create")
+
+    @PostMapping
     public void createAppUser(@Valid @RequestBody AppUser appUser) {
         appUserService.createAppUser(appUser);
     }
     
-    @GetMapping("/appUser/read")
+    @GetMapping
     public List<AppUser> readAllAppUser() {
         return appUserService.readAllAppUser();
     }
     
-    @GetMapping("/appUser/read/{id}")
-    public AppUser readAppUserById(@PathVariable int id) {
+    @GetMapping("/{id}")
+    public Optional<AppUser> readAppUserById(@PathVariable int id) {
         return appUserService.readAppUserById(id);
+   }
+
+    @PatchMapping("/{id}")
+    public void patchAppUser(@PathVariable int id, @Valid @RequestBody AppUser appUser) {
+        appUserService.updateAppUser(appUser, id);
     }
-    
-    @GetMapping("/appUser/read/{id}/plan")
-    public List<Plan> readPlanForAppUser(@PathVariable int id) {
-        AppUser appUser = appUserService.readAppUserById(id);
-        return appUser.getPlans();
-    }
-    
-    @GetMapping("/appUser/update/{id}")
-    public AppUser updateAppUserView(@PathVariable int id) {
-        return appUserService.readAppUserById(id);
-    }
-    
-    @PatchMapping("/appUser/update/{id}")
-    public void patchAppUser(@Valid @RequestBody AppUser appUser) {
-        appUserService.updateAppUser(appUser);
-    }
-    
-    @DeleteMapping("/appUser/delete/{id}")
+
+    @DeleteMapping("/{id}")
     public void deleteAppUserById(@PathVariable int id) {
         appUserService.deleteAppUserById(id);
     }
+
 }
