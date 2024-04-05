@@ -35,6 +35,9 @@ public class FriendGroupService {
     }
     
     public void deleteFriendGroupById(int id) {
+        Optional.ofNullable(friendGroupRepository.findById(id)
+                .orElseThrow(() -> new FriendGroupNotFoundException("해당 id를 가진 그룹이 없습니다.")));
+        
         friendGroupRepository.deleteById(id);
     }
 }
