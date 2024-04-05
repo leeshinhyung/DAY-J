@@ -20,13 +20,11 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import eu.tutorials.practiceapp.R
+import com.dayj.dayj.R
+import com.dayj.dayj.ui.theme.Black2A
+import com.dayj.dayj.ui.theme.Green12
 import eu.tutorials.practiceapp.friends.UserEntity
-import eu.tutorials.practiceapp.ui.theme.Black3A
-import eu.tutorials.practiceapp.ui.theme.BtnGreen
-import eu.tutorials.practiceapp.ui.theme.TextBlack
-import eu.tutorials.practiceapp.ui.theme.TextGray
-import eu.tutorials.practiceapp.ui.theme.TextGreen
+
 
 @Composable
 fun FriendListItem(
@@ -50,7 +48,7 @@ fun FriendListItem(
         Text(
             text = user.userName,
             style = TextStyle(
-                color = TextBlack,
+                color = Black2A,
                 fontWeight = FontWeight.Medium,
                 fontSize = 14.sp
             )
@@ -62,7 +60,7 @@ fun FriendListItem(
                 modifier = Modifier
                     .width(30.dp)
                     .height(3.dp)
-                    .background(color = TextGreen)
+                    .background(color = Green12)
             )
         }
     }
