@@ -25,8 +25,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import eu.tutorials.practiceapp.R
-import eu.tutorials.practiceapp.ui.theme.TextBlack
+import com.dayj.dayj.R
+import com.dayj.dayj.ui.theme.Black2A
+
 
 @Composable
 fun FriendsGroupListScreen() {
@@ -46,7 +47,7 @@ fun FriendsGroupListScreen() {
                 Text(
                     text = "친구",
                     style = TextStyle(
-                        color = TextBlack,
+                        color = Black2A,
                         fontWeight = FontWeight.Bold,
                         fontSize = 28.sp
                     )
@@ -137,7 +138,7 @@ fun ItemFriendGroup(group: FriendsGroupEntity) {
             Text(
                 text = group.groupName,
                 style = TextStyle(
-                    color = TextBlack,
+                    color = Black2A,
                     fontWeight = FontWeight.Medium,
                     fontSize = 14.sp
                 )
@@ -145,7 +146,7 @@ fun ItemFriendGroup(group: FriendsGroupEntity) {
             Text(
                 text = group.goal,
                 style = TextStyle(
-                    color = TextBlack,
+                    color = Black2A,
                     fontWeight = FontWeight.Medium,
                     fontSize = 12.sp
                 )
@@ -155,7 +156,7 @@ fun ItemFriendGroup(group: FriendsGroupEntity) {
         Text(
             text = "${group.participantsCount}/20",
             style = TextStyle(
-                color = TextBlack,
+                color = Black2A,
                 fontWeight = FontWeight.Medium,
                 fontSize = 12.sp
             )

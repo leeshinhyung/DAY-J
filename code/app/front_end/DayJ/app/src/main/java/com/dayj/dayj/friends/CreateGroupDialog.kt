@@ -29,8 +29,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
-import eu.tutorials.practiceapp.ui.theme.Black3A
-import eu.tutorials.practiceapp.ui.theme.GrayDDD
+import com.dayj.dayj.ui.theme.Black3A
+import com.dayj.dayj.ui.theme.GrayDDD
+
 
 @Composable
 fun CreateGroupDialog(onDismiss: () -> Unit) {
