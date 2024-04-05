@@ -41,6 +41,7 @@ import com.dayj.dayj.ui.theme.Black3A
 import com.dayj.dayj.ui.theme.Gray6F
 import com.dayj.dayj.ui.theme.GrayAFAF
 import com.dayj.dayj.ui.theme.GrayDDD
+import eu.tutorials.practiceapp.component.FriendListItem
 import kotlin.random.Random
 
 val dummyFriends = listOf(
