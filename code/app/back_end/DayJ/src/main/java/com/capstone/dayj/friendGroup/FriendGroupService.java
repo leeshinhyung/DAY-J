@@ -18,8 +18,7 @@ public class FriendGroupService {
     }
     
     public List<FriendGroup> readAllFriendGroup() {
-        return Optional.ofNullable(friendGroupRepository.findAll())
-                .orElseThrow(() -> new FriendGroupNotFoundException("현재 그룹 데이터가 없습니다."));
+        return friendGroupRepository.findAll();
     }
     
     public Optional<FriendGroup> readFriendGroupById(int id) {
