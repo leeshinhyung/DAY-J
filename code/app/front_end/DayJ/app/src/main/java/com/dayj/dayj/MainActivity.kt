@@ -16,6 +16,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.dayj.dayj.ui.theme.Background
 import com.dayj.dayj.ui.theme.DayJTheme
+import eu.tutorials.practiceapp.friends.FriendsGroupListScreen
+import eu.tutorials.practiceapp.friends.GroupDetailScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +29,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = Background
                 ) {
-                    HomeScreen()
+                    //HomeScreen()
+                    FriendsGroupListScreen()
+                    //GroupDetailScreen()
                 }
             }
         }

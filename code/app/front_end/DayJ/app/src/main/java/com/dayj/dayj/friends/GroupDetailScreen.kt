@@ -34,14 +34,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import eu.tutorials.practiceapp.R
-import eu.tutorials.practiceapp.component.FriendListItem
-import eu.tutorials.practiceapp.ui.theme.Background
-import eu.tutorials.practiceapp.ui.theme.Black3A
-import eu.tutorials.practiceapp.ui.theme.GrayAFAF
-import eu.tutorials.practiceapp.ui.theme.GrayDDD
-import eu.tutorials.practiceapp.ui.theme.TextBlack
-import eu.tutorials.practiceapp.ui.theme.TextGray
+import com.dayj.dayj.R
+import com.dayj.dayj.ui.theme.Background
+import com.dayj.dayj.ui.theme.Black2A
+import com.dayj.dayj.ui.theme.Black3A
+import com.dayj.dayj.ui.theme.Gray6F
+import com.dayj.dayj.ui.theme.GrayAFAF
+import com.dayj.dayj.ui.theme.GrayDDD
 import kotlin.random.Random
 
 val dummyFriends = listOf(
@@ -227,7 +226,7 @@ fun AchievementListView(achievements: List<AchievementEntity>) {
         Text(
             text = "달성률",
             style = TextStyle(
-                color = TextGray,
+                color = Gray6F,
                 fontWeight = FontWeight.Medium,
                 fontSize = 14.sp
             )
@@ -265,7 +264,7 @@ fun AchievementByMember(rank: Int, achievement: AchievementEntity) {
                     .height(18.dp)
                     .align(Alignment.BottomEnd)
                     .background(
-                        color = if (rank <= 3) Black3A else TextGray,
+                        color = if (rank <= 3) Black3A else Gray6F,
                         shape = CircleShape
                     ),
                 contentAlignment = Alignment.Center
@@ -286,7 +285,7 @@ fun AchievementByMember(rank: Int, achievement: AchievementEntity) {
         Text(
             text = achievement.user.userName,
             style = TextStyle(
-                color = TextBlack,
+                color = Black2A,
                 fontWeight = FontWeight.Medium,
                 fontSize = 14.sp
             )
@@ -297,7 +296,7 @@ fun AchievementByMember(rank: Int, achievement: AchievementEntity) {
         Text(
             text = "${achievement.achievementRate.toInt()}%",
             style = TextStyle(
-                color = TextBlack,
+                color = Black2A,
                 fontWeight = FontWeight.Bold,
                 fontSize = 14.sp
             )
@@ -323,7 +322,7 @@ fun FriendListView(
             Text(
                 text = "친구 목록",
                 style = TextStyle(
-                    color = TextGray,
+                    color = Gray6F,
                     fontWeight = FontWeight.Medium,
                     fontSize = 14.sp
                 )
