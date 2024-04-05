@@ -18,7 +18,8 @@ public class FriendGroupService {
     }
     
     public List<FriendGroup> readAllFriendGroup() {
-        return friendGroupRepository.findAll();
+        return Optional.ofNullable(friendGroupRepository.findAll())
+                .orElseThrow(() -> new FriendGroupNotFoundException("현재 그룹 데이터가 없습니다."));
     }
     
     public Optional<FriendGroup> readFriendGroupById(int id) {
@@ -35,6 +36,9 @@ public class FriendGroupService {
     }
     
     public void deleteFriendGroupById(int id) {
+        Optional.ofNullable(friendGroupRepository.findById(id)
+                .orElseThrow(() -> new FriendGroupNotFoundException("해당 id를 가진 그룹이 없습니다.")));
+        
         friendGroupRepository.deleteById(id);
     }
 }
