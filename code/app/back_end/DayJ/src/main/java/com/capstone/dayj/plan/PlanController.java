@@ -26,12 +26,12 @@ public class PlanController {
     
     @GetMapping("/{id}")
     public Plan readPlanById(@PathVariable int id) {
-        return planService.readPlanById(id).get();
+        return planService.readPlanById(id);
     }
     
     @GetMapping("tag/{planTag}")
     public Plan readByPlanTag(@PathVariable String planTag) {
-        return planService.readPlanByPlanTag(planTag).get();
+        return planService.readPlanByPlanTag(planTag);
     }
     
     @PatchMapping("/{id}")
