@@ -1,14 +1,14 @@
 package com.capstone.dayj.post;
 
 import com.capstone.dayj.appUser.AppUser;
-import com.capstone.dayj.appUser.AppUserNotFoundException;
 import com.capstone.dayj.appUser.AppUserRepository;
+import com.capstone.dayj.exception.CustomException;
+import com.capstone.dayj.exception.ErrorCode;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,13 +17,19 @@ public class PostService {
     private final PostRepository postRepository;
     private final AppUserRepository appUserRepository;
 
-    @Transactional
-    public void createPost(PostDto.Request dto, int userId) {
-        AppUser appUser = appUserRepository.findById(userId)
-                .orElseThrow(() -> new AppUserNotFoundException("해당 id를 가진 사용자가 없습니다."));
-        dto.setAppUser(appUser);
-        Post post = dto.toEntity();
+//    @Transactional
+//    public void createPost(PostDto.Request dto, int userId) {
+//        AppUser appUser = appUserRepository.findById(userId)
+//                .orElseThrow(() -> new CustomException(ErrorCode.APP_USER_NOT_FOUND));
+//        dto.setAppUser(appUser);
+//        Post post = dto.toEntity();
+//
+//        postRepository.save(post);
+//    }
 
+    @Transactional
+    public void createPost(PostDto.Request dto) {
+        Post post = dto.toEntity();
         postRepository.save(post);
     }
     
@@ -34,7 +40,7 @@ public class PostService {
     @Transactional
     public PostDto.Response readPostById(int id) {
         Post post = postRepository.findById(id)
-                .orElseThrow(()-> new PostNotFoundException("해당 게시물이 존재하지 않습니다."));
+                .orElseThrow(()-> new CustomException(ErrorCode.POST_NOT_FOUND));
 
         return new PostDto.Response(post);
     }
@@ -42,7 +48,7 @@ public class PostService {
     @Transactional
     public void updatePost(int postId, PostDto.Request dto) {
         Post post = postRepository.findById(postId)
-                        .orElseThrow(()-> new PostNotFoundException("해당 게시물이 존재하지 않습니다."));
+                .orElseThrow(()-> new CustomException(ErrorCode.POST_NOT_FOUND));
 
         post.update(dto.getPostTitle(), dto.getPostContent(), dto.getPostTag(), dto.isPostIsAnonymous(), dto.getPostTag());
 
@@ -64,7 +70,7 @@ public class PostService {
     @Transactional
     public void deletePostById(int postId) {
         Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new PostNotFoundException("해당 게시물이 존재하지 않습니다."));
+                .orElseThrow(()-> new CustomException(ErrorCode.POST_NOT_FOUND));
 
         postRepository.delete(post);
 

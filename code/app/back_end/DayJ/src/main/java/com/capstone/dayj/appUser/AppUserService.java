@@ -1,6 +1,8 @@
 package com.capstone.dayj.appUser;
 
 
+import com.capstone.dayj.exception.CustomException;
+import com.capstone.dayj.exception.ErrorCode;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,12 +26,12 @@ public class AppUserService {
     
     public Optional<AppUser> readAppUserById(int id) {
         return Optional.ofNullable(appUserRepository.findById(id)
-                .orElseThrow(() -> new AppUserNotFoundException("해당 id를 가진 사용자가 없습니다.")));
+                .orElseThrow(() -> new CustomException(ErrorCode.APP_USER_NOT_FOUND)));
     }
     
     public void updateAppUser(int id, AppUser appUser) {
         AppUser existingAppUser = appUserRepository.findById(id)
-                .orElseThrow(() -> new AppUserNotFoundException("해당 id를 가진 사용자가 없습니다."));
+                .orElseThrow(() -> new CustomException(ErrorCode.APP_USER_NOT_FOUND));
         
         existingAppUser.setId(appUser.getId());
         existingAppUser.setPassword(appUser.getPassword());
@@ -37,6 +39,9 @@ public class AppUserService {
     }
     
     public void deleteAppUserById(int id) {
+        appUserRepository.findById(id)
+                .orElseThrow(() -> new CustomException(ErrorCode.APP_USER_NOT_FOUND));
+
         appUserRepository.deleteById(id);
     }
 }

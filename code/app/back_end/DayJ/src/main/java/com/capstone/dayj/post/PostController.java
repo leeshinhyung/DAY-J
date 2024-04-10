@@ -17,9 +17,14 @@ public class PostController {
         this.postService = postService;
     }
 
+//    @PostMapping
+//    public void createPost(@Valid @RequestBody PostDto.Request request, AppUser appUser) {
+//        postService.createPost(request, appUser.getId());
+//    }
+
     @PostMapping
-    public void createPost(@Valid @RequestBody PostDto.Request request, AppUser appUser) {
-        postService.createPost(request, appUser.getId());
+    public void createPost(@Valid @RequestBody PostDto.Request dto) {
+        postService.createPost(dto);
     }
     
     @GetMapping
@@ -33,8 +38,8 @@ public class PostController {
     }
     
     @PatchMapping("/{id}")
-    public ResponseEntity patchPost(@PathVariable int id, @Valid @RequestBody PostDto.Request request) {
-        postService.updatePost(id, request);
+    public ResponseEntity patchPost(@PathVariable int id, @Valid @RequestBody PostDto.Request post) {
+        postService.updatePost(id, post);
         return ResponseEntity.ok(id);
     }
     

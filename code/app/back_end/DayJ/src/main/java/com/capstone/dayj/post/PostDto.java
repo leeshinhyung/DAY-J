@@ -2,10 +2,12 @@ package com.capstone.dayj.post;
 
 import com.capstone.dayj.appUser.AppUser;
 import com.capstone.dayj.comment.Comment;
+import com.capstone.dayj.comment.CommentDto;
 import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PostDto {
 
@@ -48,7 +50,7 @@ public class PostDto {
         private final boolean postIsAnonymous;
         private final String postPhoto;
         private final AppUser appUser;
-        private final List<Comment> comment;
+        private final List<CommentDto.Response> comment;
 
         public Response(Post post) {
             this.id = post.getId();
@@ -61,7 +63,7 @@ public class PostDto {
             this.postIsAnonymous = post.isPostIsAnonymous();
             this.postPhoto = post.getPostPhoto();
             this.appUser = post.getAppUser();
-            this.comment = post.getComment(); //수정 필요
+            this.comment = post.getComment().stream().map(CommentDto.Response::new).collect(Collectors.toList());
         }
 
     }

@@ -1,5 +1,8 @@
 package com.capstone.dayj.friendGroup;
 
+import com.capstone.dayj.exception.CustomException;
+import com.capstone.dayj.exception.ErrorCode;
+import com.capstone.dayj.plan.Plan;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,25 +21,30 @@ public class FriendGroupService {
     }
     
     public List<FriendGroup> readAllFriendGroup() {
+        List<FriendGroup> friendGroups = friendGroupRepository.findAll();
+        
+        if (friendGroups.isEmpty())
+            throw new CustomException(ErrorCode.FRIEND_GROUP_NOT_FOUND);
+        
         return friendGroupRepository.findAll();
     }
     
-    public Optional<FriendGroup> readFriendGroupById(int id) {
-        return Optional.ofNullable(friendGroupRepository.findById(id)
-                .orElseThrow(() -> new FriendGroupNotFoundException("해당 id를 가진 그룹이 없습니다.")));
+    public FriendGroup readFriendGroupById(int id) {
+        return friendGroupRepository.findById(id)
+                .orElseThrow(() -> new CustomException(ErrorCode.FRIEND_GROUP_NOT_FOUND));
     }
     
     public void updateFriendGroup(int id, FriendGroup friendGroup) {
         FriendGroup existingFriendGroup = friendGroupRepository.findById(id)
-                .orElseThrow(() -> new FriendGroupNotFoundException("해당 id를 가진 그룹이 없습니다."));
+                .orElseThrow(() -> new CustomException(ErrorCode.FRIEND_GROUP_NOT_FOUND));
         
         existingFriendGroup.setId(friendGroup.getId());
         friendGroupRepository.save(existingFriendGroup);
     }
     
     public void deleteFriendGroupById(int id) {
-        Optional.ofNullable(friendGroupRepository.findById(id)
-                .orElseThrow(() -> new FriendGroupNotFoundException("해당 id를 가진 그룹이 없습니다.")));
+        friendGroupRepository.findById(id)
+                .orElseThrow(() -> new CustomException(ErrorCode.FRIEND_GROUP_NOT_FOUND));
         
         friendGroupRepository.deleteById(id);
     }

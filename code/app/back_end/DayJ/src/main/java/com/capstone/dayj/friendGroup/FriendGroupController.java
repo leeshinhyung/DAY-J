@@ -27,7 +27,7 @@ public class FriendGroupController {
     
     @GetMapping("/{id}")
     public FriendGroup readFriendGroupById(@PathVariable int id) {
-        return friendGroupService.readFriendGroupById(id).get();
+        return friendGroupService.readFriendGroupById(id);
     }
     
     @PatchMapping("/{id}")

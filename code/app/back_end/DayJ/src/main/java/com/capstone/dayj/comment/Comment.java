@@ -9,9 +9,11 @@ import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Getter
 @Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,15 +37,6 @@ public class Comment {
     @JsonIgnore
     private Post post;
 
-    @Builder
-    public Comment(int id, String content, LocalDateTime commentDate, boolean commentIsAnonymous, AppUser appUser, Post post) {
-        this.id = id;
-        this.content = content;
-        this.commentDate = commentDate;
-        this.commentIsAnonymous = commentIsAnonymous;
-        this.appUser = appUser;
-        this.post = post;
-    }
     public void update(String content, boolean commentIsAnonymous){
         this.content = content;
         this.commentIsAnonymous = commentIsAnonymous;
