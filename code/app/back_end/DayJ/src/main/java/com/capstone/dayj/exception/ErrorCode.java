@@ -20,9 +20,17 @@ public enum ErrorCode {
     PLAN_NOT_FOUND(HttpStatus.NOT_FOUND, "계획을 찾을 수 없습니다."),
     
     // 404 FRIEND_GROUP_NOT_FOUND : 계획을 찾을 수 없음
-    FRIEND_GROUP_NOT_FOUND(HttpStatus.NOT_FOUND, "그룹을 찾을 수 없습니다.")
-    ;
-    
+    FRIEND_GROUP_NOT_FOUND(HttpStatus.NOT_FOUND, "그룹을 찾을 수 없습니다."),
+
+    // 404 APP_USER_NOT_FOUND : 회원을 찾을 수 없음
+    APP_USER_NOT_FOUND(HttpStatus.NOT_FOUND, "회원을 찾을 수 없습니다."),
+
+    // 404 COMMENT_NOT_FOUND : 댓글을 찾을 수 없음
+    COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "댓글을 찾을 수 없습니다."),
+
+    // 404 POST_NOT_FOUND : 게시물을 찾을 수 없음
+    POST_NOT_FOUND(HttpStatus.NOT_FOUND, "게시물을 찾을 수 없습니다.");
+
     private final HttpStatus status;
     private final String message;
 }

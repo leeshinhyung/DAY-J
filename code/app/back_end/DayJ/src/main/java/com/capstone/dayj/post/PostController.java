@@ -1,45 +1,51 @@
 package com.capstone.dayj.post;
 
+import com.capstone.dayj.appUser.AppUser;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/post")
 public class PostController {
     PostService postService;
-    
+
     public PostController(PostService postService) {
         this.postService = postService;
     }
-    
-    @PostMapping("/post/create")
-    public void createPost(@Valid @RequestBody Post post) {
-        postService.createPost(post);
+
+//    @PostMapping
+//    public void createPost(@Valid @RequestBody PostDto.Request request, AppUser appUser) {
+//        postService.createPost(request, appUser.getId());
+//    }
+
+    @PostMapping
+    public void createPost(@Valid @RequestBody PostDto.Request dto) {
+        postService.createPost(dto);
     }
     
-    @GetMapping("/post/read")
+    @GetMapping
     public List<Post> readAllPost() {
         return postService.readAllPost();
     }
     
-    @GetMapping("/post/read/{id}")
-    public Post readPostById(@PathVariable int id) {
-        return postService.readPostById(id);
+    @GetMapping("/{id}")
+    public ResponseEntity readPostById(@PathVariable int id) {
+        return ResponseEntity.ok(postService.readPostById(id));
     }
     
-    @GetMapping("/post/update/{id}")
-    public Post updatePostView(@PathVariable int id) {
-        return postService.readPostById(id);
+    @PatchMapping("/{id}")
+    public ResponseEntity patchPost(@PathVariable int id, @Valid @RequestBody PostDto.Request post) {
+        postService.updatePost(id, post);
+        return ResponseEntity.ok(id);
     }
     
-    @PatchMapping("/post/update/{id}")
-    public void patchPost(@Valid @RequestBody Post post) {
-        postService.updatePost(post);
-    }
-    
-    @DeleteMapping("/post/delete/{id}")
-    public void deletePostById(@PathVariable int id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletePostById(@PathVariable int id) {
         postService.deletePostById(id);
+        return ResponseEntity.ok(id);
     }
 }
