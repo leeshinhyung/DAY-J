@@ -8,6 +8,7 @@ import com.capstone.dayj.post.Post;
 import com.capstone.dayj.post.PostRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,18 +34,23 @@ public class CommentService {
         Comment comment = dto.toEntity();
         commentRepository.save(comment);
     }
-    @Transactional
-    public List<CommentDto.Response> readAllComment(int postId) {
+
+    public List<CommentDto.Response> readAllComment(int postId, int userId) {
+        AppUser user = appUserRepository.findById(userId)
+                .orElseThrow(() -> new CustomException(ErrorCode.APP_USER_NOT_FOUND));
         Post post = postRepository.findById(postId)
                 .orElseThrow(()-> new CustomException(ErrorCode.POST_NOT_FOUND));
+
+
         List<Comment> comments = post.getComment();
+
         return comments.stream().map(CommentDto.Response::new).collect(Collectors.toList());
     }
 
-    @Transactional
     public CommentDto.Response readCommentById(int postId, int commentId){
         Comment comment = commentRepository.findCommentByPostIdAndId(postId, commentId)
                 .orElseThrow(()-> new CustomException(ErrorCode.COMMENT_NOT_FOUND));
+
         return new CommentDto.Response(comment);
     }
     @Transactional

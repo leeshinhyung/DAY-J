@@ -17,14 +17,14 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @PostMapping("/{post_id}/comment")
-    public void createComment(AppUser user, @PathVariable int post_id, @Valid @RequestBody CommentDto.Request dto){
-        commentService.createComment(user.getId(), post_id, dto);
+    @PostMapping("/{app_user_id}/{post_id}/comment")
+    public void createComment(@PathVariable int app_user_id, @PathVariable int post_id, @Valid @RequestBody CommentDto.Request dto){
+        commentService.createComment(app_user_id, post_id, dto);
     }
 
-    @GetMapping("/{post_id}/comment")
-    public List<CommentDto.Response> readAllComment(@PathVariable int post_id){
-        return commentService.readAllComment(post_id);
+    @GetMapping("/{app_user_id}/{post_id}/comment")
+    public List<CommentDto.Response> readAllComment(@PathVariable int app_user_id, @PathVariable int post_id){
+        return commentService.readAllComment(app_user_id, post_id);
     }
 
     @GetMapping("/{post_id}/comment/{comment_id}")

@@ -20,7 +20,7 @@ public class PostService {
 //    @Transactional
 //    public void createPost(PostDto.Request dto, int userId) {
 //        AppUser appUser = appUserRepository.findById(userId)
-//                .orElseThrow(() -> new CustomException(ErrorCode.APP_USER_NOT_FOUND));
+//                .orElseThrow(() ->new CustomException(ErrorCode.APP_USER_NOT_FOUND));
 //        dto.setAppUser(appUser);
 //        Post post = dto.toEntity();
 //
@@ -30,9 +30,11 @@ public class PostService {
     @Transactional
     public void createPost(PostDto.Request dto) {
         Post post = dto.toEntity();
+
         postRepository.save(post);
     }
-    
+
+
     public List<Post> readAllPost() {
         return postRepository.findAll();
     } // 페이징 처리 필요함
@@ -72,7 +74,7 @@ public class PostService {
         Post post = postRepository.findById(postId)
                 .orElseThrow(()-> new CustomException(ErrorCode.POST_NOT_FOUND));
 
-        postRepository.delete(post);
+        postRepository.deleteById(post.getId());
 
 
 //        Optional<AppUser> user = appUserService.readAppUserById(userId);

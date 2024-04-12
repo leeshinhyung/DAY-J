@@ -6,8 +6,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -29,9 +31,14 @@ public class Post {
     private String postTitle;
     private String postContent;
     private String postTag;
-    
+
+    @CreatedDate
     @Column(nullable = false)
-    private LocalDate postDate;
+    private LocalDate createdDate;
+
+    @CreatedDate
+    @Column(nullable = false)
+    private LocalDate updateDate;
 
     @Column(nullable = false)
     @ColumnDefault("1")

@@ -6,7 +6,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.data.annotation.CreatedDate;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -21,7 +23,16 @@ public class Comment {
 
     @Column(nullable = false)
     private String content;
+
+    @CreatedDate
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
     private LocalDateTime commentDate;
+
+    @CreatedDate
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
+    private LocalDateTime commentUpdateDate;
 
     @Column(nullable = false)
     @ColumnDefault("1")
