@@ -2,6 +2,7 @@ package com.capstone.dayj.plan;
 
 import com.capstone.dayj.exception.CustomException;
 import com.capstone.dayj.exception.ErrorCode;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,11 +15,15 @@ public class PlanService {
         this.planRepository = planRepository;
     }
     
-    public void createPlan(Plan plan) {
+    @Transactional
+    public void createPlan(PlanDto.Request dto) {
+        Plan plan = dto.toEntity();
         planRepository.save(plan);
     }
     
+    @Transactional
     public List<Plan> readAllPlan() {
+        // TODO : Dto로 변환
         List<Plan> plans = planRepository.findAll();
         
         if (plans.isEmpty())
@@ -27,28 +32,37 @@ public class PlanService {
         return plans;
     }
     
-    public Plan readPlanById(int id) {
-        return planRepository.findById(id)
-                .orElseThrow(() -> new CustomException(ErrorCode.PLAN_NOT_FOUND));
-    }
-    
-    public Plan readPlanByPlanTag(String planTag) {
-        return planRepository.findByPlanTag(planTag)
-                .orElseThrow(() -> new CustomException(ErrorCode.PLAN_NOT_FOUND));
-    }
-    
-    public void updatePlan(int id, Plan plan) {
-        Plan existingPlan = planRepository.findById(id)
+    @Transactional
+    public PlanDto.Response readPlanById(int id) {
+        Plan plan = planRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.PLAN_NOT_FOUND));
         
-        existingPlan.setId(plan.getId());
-        planRepository.save(existingPlan);
+        return new PlanDto.Response(plan);
     }
     
+    @Transactional
+    public PlanDto.Response readPlanByPlanTag(String planTag) {
+        Plan plan = planRepository.findByPlanTag(planTag)
+                .orElseThrow(() -> new CustomException(ErrorCode.PLAN_NOT_FOUND));
+        
+        return new PlanDto.Response(plan);
+    }
+    
+    @Transactional
+    public void updatePlan(int id, PlanDto.Request dto) {
+        Plan plan = planRepository.findById(id)
+                .orElseThrow(() -> new CustomException(ErrorCode.PLAN_NOT_FOUND));
+        
+        plan.update(dto.getPlanAlarmDate(), dto.getPlanTag(),
+                dto.getGoal(), dto.getPlanPhoto(), dto.getPlanTime(), dto.getPlanDay());
+    }
+    
+    @Transactional
     public void deletePlanById(int id) {
-        planRepository.findById(id)
+        Plan plan = planRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.PLAN_NOT_FOUND));
+        PlanDto.Response planDto = new PlanDto.Response(plan);
         
-        planRepository.deleteById(id);
+        planRepository.deleteById(planDto.getId());
     }
 }
