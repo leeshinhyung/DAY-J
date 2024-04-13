@@ -1,6 +1,7 @@
 package com.capstone.dayj.plan;
 
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,8 +16,8 @@ public class PlanController {
     }
     
     @PostMapping
-    public void createPlan(@Valid @RequestBody Plan plan) {
-        planService.createPlan(plan);
+    public void createPlan(@Valid @RequestBody PlanDto.Request dto) {
+        planService.createPlan(dto);
     }
     
     @GetMapping
@@ -25,22 +26,24 @@ public class PlanController {
     }
     
     @GetMapping("/{id}")
-    public Plan readPlanById(@PathVariable int id) {
-        return planService.readPlanById(id);
+    public ResponseEntity readPlanById(@PathVariable int id) {
+        return ResponseEntity.ok(planService.readPlanById(id));
     }
     
     @GetMapping("tag/{planTag}")
-    public Plan readByPlanTag(@PathVariable String planTag) {
-        return planService.readPlanByPlanTag(planTag);
+    public ResponseEntity readByPlanTag(@PathVariable String planTag) {
+        return ResponseEntity.ok(planService.readPlanByPlanTag(planTag));
     }
     
     @PatchMapping("/{id}")
-    public void patchPlan(@PathVariable int id, @Valid @RequestBody Plan plan) {
-        planService.updatePlan(id, plan);
+    public ResponseEntity patchPlan(@PathVariable int id, @Valid @RequestBody PlanDto.Request dto) {
+        planService.updatePlan(id, dto);
+        return ResponseEntity.ok(id);
     }
     
     @DeleteMapping("/{id}")
-    public void deletePlanById(@PathVariable int id) {
+    public ResponseEntity deletePlanById(@PathVariable int id) {
         planService.deletePlanById(id);
+        return ResponseEntity.ok(id);
     }
 }
