@@ -1,4 +1,4 @@
-package eu.tutorials.practiceapp.friends
+package com.dayj.dayj.friends
 
 data class FriendsGroupEntity(
     val groupId: Int,

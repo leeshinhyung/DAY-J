@@ -1,6 +1,5 @@
-package eu.tutorials.practiceapp.friends
+package com.dayj.dayj.friends
 
-import android.widget.Space
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -36,23 +35,23 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dayj.dayj.R
 import com.dayj.dayj.ui.theme.Background
-import com.dayj.dayj.ui.theme.Black2A
 import com.dayj.dayj.ui.theme.Black3A
-import com.dayj.dayj.ui.theme.Gray6F
 import com.dayj.dayj.ui.theme.GrayAFAF
 import com.dayj.dayj.ui.theme.GrayDDD
+import com.dayj.dayj.ui.theme.TextBlack
+import com.dayj.dayj.ui.theme.TextGray
 import eu.tutorials.practiceapp.component.FriendListItem
 import kotlin.random.Random
 
 val dummyFriends = listOf(
-    UserEntity(userName = "오소영", userId = 123),
-    UserEntity(userName = "문지영", userId = 3),
-    UserEntity(userName = "김채형", userId = 43),
-    UserEntity(userName = "이신형", userId = 2),
-    UserEntity(userName = "변성훈", userId = 11223),
-    UserEntity(userName = "신재호", userId = 134),
-    UserEntity(userName = "박지훈", userId = 1654),
-    UserEntity(userName = "최성원", userId = 57)
+    UserEntity(userName = "김민지", userId = 123),
+    UserEntity(userName = "이현승", userId = 3),
+    UserEntity(userName = "민승희", userId = 43),
+    UserEntity(userName = "김영광", userId = 2),
+    UserEntity(userName = "서윤호", userId = 11223),
+    UserEntity(userName = "고영민", userId = 134),
+    UserEntity(userName = "김영진", userId = 1654),
+    UserEntity(userName = "오정연", userId = 57)
 )
 
 val dummyAchievements = dummyFriends.map {
@@ -67,7 +66,9 @@ val dummyAchievements = dummyFriends.map {
 
 
 @Composable
-fun GroupDetailScreen() {
+fun GroupDetailScreen(
+    onClickBack: () -> Unit
+) {
     val dummyGoals = remember {
         mutableStateOf(
             dummyFriends.map { friend ->
@@ -85,11 +86,11 @@ fun GroupDetailScreen() {
 
 
     Column(
-       modifier = Modifier
-           .fillMaxSize()
-           .background(color = Background)
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = Background)
     ) {
-        GroupToolbar()
+        GroupToolbar(onClickBack = onClickBack)
 
         LazyColumn(
             modifier = Modifier,
@@ -135,24 +136,35 @@ fun ColumnScope.HorizontalDivider(height: Int, verticalPadding: Int = 0) {
 }
 
 @Composable
-fun GroupToolbar() {
+fun GroupToolbar(
+    onClickBack: () -> Unit
+) {
     Row(
-        modifier = Modifier.padding(start = 16.dp, top = 24.dp, end = 16.dp),
+        modifier = Modifier
+            .padding(start = 16.dp, top = 24.dp, end = 16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.left_arrow_black),
-            contentDescription = ""
-        )
-        Spacer(modifier = Modifier.padding(end = 2.dp))
-        Text(
-            text = "그룹명1",
-            style = TextStyle(
-                color = Black3A,
-                fontWeight = FontWeight.Bold,
-                fontSize = 14.sp
+        Row(
+            modifier = Modifier
+                .clickable {
+                    onClickBack()
+                }
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.left_arrow_black),
+                contentDescription = ""
             )
-        )
+            Spacer(modifier = Modifier.padding(end = 4.dp))
+            Text(
+                text = "그룹명1",
+                style = TextStyle(
+                    color = Black3A,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 14.sp
+                )
+            )
+        }
+
         Spacer(modifier = Modifier.weight(1f))
         Image(
             painter = painterResource(id = R.drawable.ic_more),
@@ -227,7 +239,7 @@ fun AchievementListView(achievements: List<AchievementEntity>) {
         Text(
             text = "달성률",
             style = TextStyle(
-                color = Gray6F,
+                color = TextGray,
                 fontWeight = FontWeight.Medium,
                 fontSize = 14.sp
             )
@@ -265,7 +277,7 @@ fun AchievementByMember(rank: Int, achievement: AchievementEntity) {
                     .height(18.dp)
                     .align(Alignment.BottomEnd)
                     .background(
-                        color = if (rank <= 3) Black3A else Gray6F,
+                        color = if (rank <= 3) Black3A else TextGray,
                         shape = CircleShape
                     ),
                 contentAlignment = Alignment.Center
@@ -286,7 +298,7 @@ fun AchievementByMember(rank: Int, achievement: AchievementEntity) {
         Text(
             text = achievement.user.userName,
             style = TextStyle(
-                color = Black2A,
+                color = TextBlack,
                 fontWeight = FontWeight.Medium,
                 fontSize = 14.sp
             )
@@ -297,7 +309,7 @@ fun AchievementByMember(rank: Int, achievement: AchievementEntity) {
         Text(
             text = "${achievement.achievementRate.toInt()}%",
             style = TextStyle(
-                color = Black2A,
+                color = TextBlack,
                 fontWeight = FontWeight.Bold,
                 fontSize = 14.sp
             )
@@ -323,7 +335,7 @@ fun FriendListView(
             Text(
                 text = "친구 목록",
                 style = TextStyle(
-                    color = Gray6F,
+                    color = TextGray,
                     fontWeight = FontWeight.Medium,
                     fontSize = 14.sp
                 )
