@@ -1,4 +1,4 @@
-package eu.tutorials.practiceapp.friends
+package com.dayj.dayj.friends
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -19,6 +19,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -26,11 +27,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dayj.dayj.R
-import com.dayj.dayj.ui.theme.Black2A
-
+import com.dayj.dayj.ui.theme.TextBlack
 
 @Composable
-fun FriendsGroupListScreen() {
+fun FriendsGroupListScreen(
+    navToGroupDetail: () -> Unit
+) {
     var isCreateGroupDialogOpen = remember{ mutableStateOf(false) }
     Box(
         modifier = Modifier
@@ -47,7 +49,7 @@ fun FriendsGroupListScreen() {
                 Text(
                     text = "친구",
                     style = TextStyle(
-                        color = Black2A,
+                        color = TextBlack,
                         fontWeight = FontWeight.Bold,
                         fontSize = 28.sp
                     )
@@ -98,7 +100,9 @@ fun FriendsGroupListScreen() {
                     items = groups,
                     itemContent = {
                         Box(
-                            modifier = Modifier.padding(bottom = 10.dp)
+                            modifier = Modifier
+                                .padding(bottom = 10.dp)
+                                .clickable { navToGroupDetail() }
                         ) {
                             ItemFriendGroup(group = it)
                         }
@@ -123,6 +127,7 @@ fun ItemFriendGroup(group: FriendsGroupEntity) {
                 color = Color.White,
                 shape = RoundedCornerShape(16.dp)
             )
+            .clip(shape = RoundedCornerShape(16.dp))
             .padding(
                 horizontal = 12.dp,
                 vertical = 15.dp
@@ -138,7 +143,7 @@ fun ItemFriendGroup(group: FriendsGroupEntity) {
             Text(
                 text = group.groupName,
                 style = TextStyle(
-                    color = Black2A,
+                    color = TextBlack,
                     fontWeight = FontWeight.Medium,
                     fontSize = 14.sp
                 )
@@ -146,7 +151,7 @@ fun ItemFriendGroup(group: FriendsGroupEntity) {
             Text(
                 text = group.goal,
                 style = TextStyle(
-                    color = Black2A,
+                    color = TextBlack,
                     fontWeight = FontWeight.Medium,
                     fontSize = 12.sp
                 )
@@ -156,7 +161,7 @@ fun ItemFriendGroup(group: FriendsGroupEntity) {
         Text(
             text = "${group.participantsCount}/20",
             style = TextStyle(
-                color = Black2A,
+                color = TextBlack,
                 fontWeight = FontWeight.Medium,
                 fontSize = 12.sp
             )
