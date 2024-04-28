@@ -9,13 +9,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PostDto {
-
+    
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
     public static class Request {
-
+        
         private int id;
         private String postTitle;
         private String postContent;
@@ -25,7 +25,7 @@ public class PostDto {
         private boolean postIsAnonymous;
         private String postPhoto;
         private AppUser appUser;
-
+        
         public Post toEntity() {
             return Post.builder()
                     .id(id)
@@ -40,7 +40,7 @@ public class PostDto {
                     .build();
         }
     }
-
+    
     @Getter
     public static class Response {
         private final int id;
@@ -55,7 +55,7 @@ public class PostDto {
         private final String postPhoto;
         private final AppUser appUser;
         private final List<CommentDto.Response> comment;
-
+        
         /* Entity -> Dto */
         public Response(Post post) {
             this.id = post.getId();
@@ -71,6 +71,5 @@ public class PostDto {
             this.appUser = post.getAppUser();
             this.comment = post.getComment().stream().map(CommentDto.Response::new).collect(Collectors.toList());
         }
-
     }
 }

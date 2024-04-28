@@ -1,4 +1,4 @@
-package eu.tutorials.practiceapp.friends
+package com.dayj.dayj.friends
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
