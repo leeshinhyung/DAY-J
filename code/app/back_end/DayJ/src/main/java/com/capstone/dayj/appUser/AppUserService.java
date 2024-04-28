@@ -3,19 +3,17 @@ package com.capstone.dayj.appUser;
 
 import com.capstone.dayj.exception.CustomException;
 import com.capstone.dayj.exception.ErrorCode;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class AppUserService {
-    private AppUserRepository appUserRepository;
-    
-    public AppUserService(AppUserRepository appUserRepository) {
-        this.appUserRepository = appUserRepository;
-    }
-    
+    private final AppUserRepository appUserRepository;
+
     public AppUser createAppUser(AppUser user) {
         return appUserRepository.save(user);
     }
@@ -23,25 +21,28 @@ public class AppUserService {
     public List<AppUser> readAllAppUser() {
         return appUserRepository.findAll();
     }
-    
-    public Optional<AppUser> readAppUserById(int id) {
-        return Optional.ofNullable(appUserRepository.findById(id)
-                .orElseThrow(() -> new CustomException(ErrorCode.APP_USER_NOT_FOUND)));
+
+    @Transactional
+    public AppUserDto.Response readAppUserById(int id) {
+        AppUser appUser = appUserRepository.findById(id)
+                .orElseThrow(() -> new CustomException(ErrorCode.APP_USER_NOT_FOUND));
+
+        return new AppUserDto.Response(appUser);
     }
-    
-    public void updateAppUser(int id, AppUser appUser) {
+
+    @Transactional
+    public void updateAppUser(int id, AppUserDto.Request dto) {
         AppUser existingAppUser = appUserRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.APP_USER_NOT_FOUND));
         
-        existingAppUser.setId(appUser.getId());
-        existingAppUser.setPassword(appUser.getPassword());
-        appUserRepository.save(existingAppUser);
+        existingAppUser.update(dto.getNickname());
     }
-    
+
+    @Transactional
     public void deleteAppUserById(int id) {
-        appUserRepository.findById(id)
+        AppUser appUser = appUserRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.APP_USER_NOT_FOUND));
 
-        appUserRepository.deleteById(id);
+        appUserRepository.deleteById(appUser.getId());
     }
 }

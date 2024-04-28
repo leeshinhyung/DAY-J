@@ -17,7 +17,7 @@ public class CommentDto {
         private int id;
         private String content;
         private boolean commentIsAnonymous;
-        private LocalDateTime commentDate;
+        private LocalDateTime commentCreateDate;
         private LocalDateTime commentUpdateDate;
         private AppUser appUser;
         private Post post;
@@ -27,7 +27,7 @@ public class CommentDto {
                     .id(id)
                     .content(content)
                     .commentIsAnonymous(commentIsAnonymous)
-                    .commentDate(commentDate)
+                    .commentCreateDate(commentCreateDate)
                     .commentUpdateDate(commentUpdateDate)
                     .appUser(appUser)
                     .post(post)
@@ -39,7 +39,7 @@ public class CommentDto {
     public static class Response {
         private final int id;
         private final String content;
-        private final LocalDateTime commentDate;
+        private final LocalDateTime commentCreateDate;
         private final LocalDateTime commentUpdateDate;
         private final boolean commentIsAnonymous;
         private final AppUser appUser;
@@ -48,7 +48,7 @@ public class CommentDto {
         public Response(Comment comment){
             this.id = comment.getId();
             this.content = comment.getContent();
-            this.commentDate = comment.getCommentDate();
+            this.commentCreateDate = comment.getCommentCreateDate();
             this.commentUpdateDate = comment.getCommentUpdateDate();
             this.commentIsAnonymous = comment.isCommentIsAnonymous();
             this.appUser = comment.getAppUser();

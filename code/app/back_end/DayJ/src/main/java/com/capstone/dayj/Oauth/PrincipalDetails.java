@@ -21,17 +21,12 @@ public class PrincipalDetails implements OAuth2User {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> collect = new ArrayList<>();
-        collect.add(new GrantedAuthority() {
-            @Override
-            public String getAuthority() {
-                return appUser.getRole();
-            }
-        });
+        collect.add((GrantedAuthority) appUser::getRole);
         return collect;
     }
 
     @Override
     public String getName() {
-        return null;
+        return appUser.getName();
     }
 }

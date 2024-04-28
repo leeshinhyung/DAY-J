@@ -7,15 +7,14 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Getter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString(exclude = {"appUser", "post"})
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,9 +26,9 @@ public class Comment {
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
-    private LocalDateTime commentDate;
+    private LocalDateTime commentCreateDate;
 
-    @CreatedDate
+    @LastModifiedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private LocalDateTime commentUpdateDate;
@@ -51,5 +50,16 @@ public class Comment {
     public void update(String content, boolean commentIsAnonymous){
         this.content = content;
         this.commentIsAnonymous = commentIsAnonymous;
+    }
+
+    @Builder
+    public Comment(int id, String content, LocalDateTime commentCreateDate, LocalDateTime commentUpdateDate, boolean commentIsAnonymous, AppUser appUser, Post post) {
+        this.id = id;
+        this.content = content;
+        this.commentCreateDate = commentCreateDate;
+        this.commentUpdateDate = commentUpdateDate;
+        this.commentIsAnonymous = commentIsAnonymous;
+        this.appUser = appUser;
+        this.post = post;
     }
 }
