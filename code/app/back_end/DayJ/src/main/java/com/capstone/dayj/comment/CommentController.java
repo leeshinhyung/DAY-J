@@ -1,10 +1,12 @@
 package com.capstone.dayj.comment;
 
 import com.capstone.dayj.appUser.AppUser;
-import com.capstone.dayj.post.Post;
 import jakarta.validation.Valid;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -17,14 +19,14 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @PostMapping("/{app_user_id}/{post_id}/comment")
-    public void createComment(@PathVariable int app_user_id, @PathVariable int post_id, @Valid @RequestBody CommentDto.Request dto){
-        commentService.createComment(app_user_id, post_id, dto);
+    @PostMapping("/{post_id}/comment")
+    public void createComment(@PathVariable int post_id, @Valid @RequestBody CommentDto.Request dto){
+        commentService.createComment(post_id, dto);
     }
 
-    @GetMapping("/{app_user_id}/{post_id}/comment")
-    public List<CommentDto.Response> readAllComment(@PathVariable int app_user_id, @PathVariable int post_id){
-        return commentService.readAllComment(app_user_id, post_id);
+    @GetMapping("/{post_id}/comment")
+    public List<CommentDto.Response> readAllComment(@PathVariable int post_id){
+        return commentService.readAllComment(post_id);
     }
 
     @GetMapping("/{post_id}/comment/{comment_id}")

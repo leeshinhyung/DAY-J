@@ -8,21 +8,22 @@ import com.capstone.dayj.setting.Setting;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import java.util.List;
 
-
+@Getter
 @Entity
-@Data
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString(exclude = {"appUserFriendGroup", "plans", "posts", "comments", "setting"})
 public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id; //기본키
-    private String name; //유저 이름
+    private String name; //유저 이름 (provider + providerId)
     @Column(nullable = false)
     private String nickname; // 유저 닉네임, 중복 불가, 친구 그룹 추가에 사용
     private String password; //유저 비밀번호
@@ -37,11 +38,11 @@ public class AppUser {
     @JsonManagedReference
     @JsonIgnore
     private List<AppUserFriendGroup> appUserFriendGroup;
-    
+
     @OneToMany(mappedBy = "appUser")
     @JsonIgnore
     private List<Plan> plans;
-    
+
     @OneToMany(mappedBy = "appUser")
     @JsonIgnore
     private List<Post> posts;
@@ -49,11 +50,14 @@ public class AppUser {
     @OneToMany(mappedBy = "appUser")
     @JsonIgnore
     private List<Comment> comments;
-    
+
     @OneToOne(mappedBy = "appUser")
     @JsonIgnore
     private Setting setting;
 
+    public void update(String nickname) {
+        this.nickname = nickname;
+    }
     @Builder
     public AppUser(int id, String name, String nickname, String password, String email, String role, String provider, String providerId, List<AppUserFriendGroup> appUserFriendGroup, List<Plan> plans, List<Post> posts, List<Comment> comments, Setting setting) {
         this.id = id;

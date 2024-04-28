@@ -2,6 +2,7 @@ package com.capstone.dayj.setting;
 
 
 import com.capstone.dayj.appUser.AppUser;
+import com.capstone.dayj.appUser.AppUserDto;
 import com.capstone.dayj.appUser.AppUserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +20,7 @@ public class SettingController {
     
     @GetMapping("/appUser/read/{id}/setting")
     public Setting readSettingForUser(@PathVariable int id) {
-        AppUser appUser = appUserService.readAppUserById(id).get();
+        AppUserDto.Response appUser = appUserService.readAppUserById(id);
         return appUser.getSetting();
     }
 }

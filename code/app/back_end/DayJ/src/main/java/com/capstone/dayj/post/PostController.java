@@ -17,35 +17,33 @@ public class PostController {
         this.postService = postService;
     }
 
-//    @PostMapping
-//    public void createPost(@Valid @RequestBody PostDto.Request request, AppUser appUser) {
-//        postService.createPost(request, appUser.getId());
-//    }
-
-    @PostMapping
-    public void createPost(@Valid @RequestBody PostDto.Request dto) {
-        postService.createPost(dto);
+    @PostMapping("/{user_id}")
+    public void createPost(@PathVariable int user_id, @Valid @RequestBody PostDto.Request dto) {
+        postService.createPost(dto, user_id);
     }
-    
+
     @GetMapping
     public List<Post> readAllPost() {
         return postService.readAllPost();
     }
     
+//    @GetMapping
+//    public List<PostDto.Response> readAllPost() {
+//        return postService.readAllPost();
+//    }
+    
     @GetMapping("/{id}")
-    public ResponseEntity readPostById(@PathVariable int id) {
-        return ResponseEntity.ok(postService.readPostById(id));
+    public PostDto.Response readPostById(@PathVariable int id) {
+        return postService.readPostById(id);
     }
     
     @PatchMapping("/{id}")
-    public ResponseEntity patchPost(@PathVariable int id, @Valid @RequestBody PostDto.Request post) {
+    public void patchPost(@PathVariable int id, @Valid @RequestBody PostDto.Request post) {
         postService.updatePost(id, post);
-        return ResponseEntity.ok(id);
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity deletePostById(@PathVariable int id) {
+    public void deletePostById(@PathVariable int id) {
         postService.deletePostById(id);
-        return ResponseEntity.ok(id);
     }
 }

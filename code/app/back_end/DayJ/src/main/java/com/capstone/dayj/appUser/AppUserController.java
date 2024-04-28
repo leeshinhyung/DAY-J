@@ -25,13 +25,13 @@ public class AppUserController {
     }
     
     @GetMapping("/{id}")
-    public AppUser readAppUserById(@PathVariable int id) {
-        return appUserService.readAppUserById(id).get();
+    public AppUserDto.Response readAppUserById(@PathVariable int id) {
+        return appUserService.readAppUserById(id);
     }
     
     @PatchMapping("/{id}")
-    public void patchAppUser(@PathVariable int id, @Valid @RequestBody AppUser appUser) {
-        appUserService.updateAppUser(id, appUser);
+    public void patchAppUser(@PathVariable int id, @Valid @RequestBody AppUserDto.Request dto) {
+        appUserService.updateAppUser(id, dto);
     }
     
     @DeleteMapping("/{id}")

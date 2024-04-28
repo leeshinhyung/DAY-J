@@ -1,5 +1,6 @@
 package com.capstone.dayj.comment;
 
+import com.capstone.dayj.Oauth.CurrentUserProvider;
 import com.capstone.dayj.appUser.AppUser;
 import com.capstone.dayj.appUser.AppUserRepository;
 import com.capstone.dayj.exception.CustomException;
@@ -8,7 +9,8 @@ import com.capstone.dayj.post.Post;
 import com.capstone.dayj.post.PostRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.Hibernate;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,13 +22,19 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final AppUserRepository appUserRepository;
     private final PostRepository postRepository;
+    private final CurrentUserProvider currentUserProvider;
+
+    private String getUserName(){
+        Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+        return loggedInUser.getName();
+    }
 
     @Transactional
-    public void createComment (int userId, int postId, CommentDto.Request dto) {
-        AppUser user = appUserRepository.findById(userId)
-                .orElseThrow(() -> new CustomException(ErrorCode.APP_USER_NOT_FOUND));
+    public void createComment (int postId, CommentDto.Request dto) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(()-> new CustomException(ErrorCode.POST_NOT_FOUND));
+        AppUser user = appUserRepository.findByName(currentUserProvider.getCurrentUserName())
+                .orElseThrow(() -> new CustomException(ErrorCode.APP_USER_NOT_FOUND));
 
         dto.setAppUser(user);
         dto.setPost(post);
@@ -35,12 +43,9 @@ public class CommentService {
         commentRepository.save(comment);
     }
 
-    public List<CommentDto.Response> readAllComment(int postId, int userId) {
-        AppUser user = appUserRepository.findById(userId)
-                .orElseThrow(() -> new CustomException(ErrorCode.APP_USER_NOT_FOUND));
-        Post post = postRepository.findById(postId)
+    public List<CommentDto.Response> readAllComment(int postId) {
+         Post post = postRepository.findById(postId)
                 .orElseThrow(()-> new CustomException(ErrorCode.POST_NOT_FOUND));
-
 
         List<Comment> comments = post.getComment();
 

@@ -7,17 +7,16 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Getter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString(exclude = {"comment", "appUser"})
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,12 +32,13 @@ public class Post {
     private String postTag;
 
     @CreatedDate
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
-    private LocalDate createdDate;
+    private LocalDateTime postCreateDate;
 
-    @CreatedDate
+    @LastModifiedDate
     @Column(nullable = false)
-    private LocalDate updateDate;
+    private LocalDateTime postUpdateDate;
 
     @Column(nullable = false)
     @ColumnDefault("1")
@@ -51,9 +51,9 @@ public class Post {
     @JsonIgnore
     private List<Comment> comment;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "app_user_id", referencedColumnName = "id")
     @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "app_user_id", referencedColumnName = "id")
     private AppUser appUser;
 
     public void update(String postTitle, String postContent, String postTag, boolean postIsAnonymous, String postPhoto){
@@ -62,5 +62,21 @@ public class Post {
         this.postTag = postTag;
         this.postIsAnonymous = postIsAnonymous;
         this.postPhoto = postPhoto;
+    }
+
+    @Builder
+    public Post(int id, int postView, int postLike, String postTitle, String postContent, String postTag, LocalDateTime postCreateDate, LocalDateTime postUpdateDate, boolean postIsAnonymous, String postPhoto, List<Comment> comment, AppUser appUser) {
+        this.id = id;
+        this.postView = postView;
+        this.postLike = postLike;
+        this.postTitle = postTitle;
+        this.postContent = postContent;
+        this.postTag = postTag;
+        this.postCreateDate = postCreateDate;
+        this.postUpdateDate = postUpdateDate;
+        this.postIsAnonymous = postIsAnonymous;
+        this.postPhoto = postPhoto;
+        this.comment = comment;
+        this.appUser = appUser;
     }
 }
