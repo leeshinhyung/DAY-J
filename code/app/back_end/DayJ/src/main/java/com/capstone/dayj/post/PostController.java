@@ -6,39 +6,40 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/post")
 public class PostController {
     PostService postService;
-    
+
     public PostController(PostService postService) {
         this.postService = postService;
     }
-    
-    @PostMapping("/post/create")
-    public void createPost(@Valid @RequestBody Post post) {
-        postService.createPost(post);
+
+    @PostMapping("/{user_id}")
+    public void createPost(@PathVariable int user_id, @Valid @RequestBody PostDto.Request dto) {
+        postService.createPost(dto, user_id);
     }
-    
-    @GetMapping("/post/read")
+
+    @GetMapping
     public List<Post> readAllPost() {
         return postService.readAllPost();
     }
-    
-    @GetMapping("/post/read/{id}")
-    public Post readPostById(@PathVariable int id) {
+
+//    @GetMapping
+//    public List<PostDto.Response> readAllPost() {
+//        return postService.readAllPost();
+//    }
+
+    @GetMapping("/{id}")
+    public PostDto.Response readPostById(@PathVariable int id) {
         return postService.readPostById(id);
     }
-    
-    @GetMapping("/post/update/{id}")
-    public Post updatePostView(@PathVariable int id) {
-        return postService.readPostById(id);
+
+    @PatchMapping("/{id}")
+    public void patchPost(@PathVariable int id, @Valid @RequestBody PostDto.Request post) {
+        postService.updatePost(id, post);
     }
-    
-    @PatchMapping("/post/update/{id}")
-    public void patchPost(@Valid @RequestBody Post post) {
-        postService.updatePost(post);
-    }
-    
-    @DeleteMapping("/post/delete/{id}")
+
+    @DeleteMapping("/{id}")
     public void deletePostById(@PathVariable int id) {
         postService.deletePostById(id);
     }

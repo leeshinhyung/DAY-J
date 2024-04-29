@@ -1,6 +1,7 @@
 package com.capstone.dayj.Oauth;
 
 import com.capstone.dayj.appUser.AppUser;
+import com.capstone.dayj.appUser.AppUserDto;
 import com.capstone.dayj.appUser.AppUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,18 +26,19 @@ public class OAuth2AppUserService extends DefaultOAuth2UserService {
         String username = provider + "_" + providerId; //중복이 발생하지 않도록 provider와 providerId를 조합
         String email = oAuth2User.getAttribute("email");
         String role = "ROLE_USER"; //일반 유저
+        String nickname = "test"; // nickname 설정
         Optional<AppUser> findAppUser = appUserRepository.findByName(username);
         if (findAppUser.isEmpty()) { //찾지 못했다면
-            AppUser appUser = AppUser.builder()
+            AppUserDto.Request appUser = AppUserDto.Request.builder()
                     .name(username)
                     .email(email)
                     .password(encoder.encode("password"))
                     .role(role)
+                    .nickname(nickname)
                     .provider(provider)
                     .providerId(providerId).build();
-            appUserRepository.save(appUser);
+            appUserRepository.save(appUser.toEntity());
         }
         return oAuth2User;
     }
 }
-

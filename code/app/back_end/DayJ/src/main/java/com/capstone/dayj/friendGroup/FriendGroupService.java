@@ -2,20 +2,17 @@ package com.capstone.dayj.friendGroup;
 
 import com.capstone.dayj.exception.CustomException;
 import com.capstone.dayj.exception.ErrorCode;
-import com.capstone.dayj.plan.Plan;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class FriendGroupService {
-    private FriendGroupRepository friendGroupRepository;
-    
-    public FriendGroupService(FriendGroupRepository friendGroupRepository) {
-        this.friendGroupRepository = friendGroupRepository;
-    }
-    
+    private final FriendGroupRepository friendGroupRepository;
+
     public void createFriendGroup(FriendGroup group) {
         friendGroupRepository.save(group);
     }
@@ -28,18 +25,21 @@ public class FriendGroupService {
         
         return friendGroupRepository.findAll();
     }
-    
-    public FriendGroup readFriendGroupById(int id) {
-        return friendGroupRepository.findById(id)
+
+    @Transactional
+    public FriendGroupDto.Response readFriendGroupById(int id) {
+        FriendGroup friendGroup = friendGroupRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.FRIEND_GROUP_NOT_FOUND));
+
+        return new FriendGroupDto.Response(friendGroup);
     }
-    
-    public void updateFriendGroup(int id, FriendGroup friendGroup) {
+
+    @Transactional
+    public void updateFriendGroup(int id, FriendGroupDto.Request dto) {
         FriendGroup existingFriendGroup = friendGroupRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.FRIEND_GROUP_NOT_FOUND));
-        
-        existingFriendGroup.setId(friendGroup.getId());
-        friendGroupRepository.save(existingFriendGroup);
+
+        existingFriendGroup.update(dto.getGroupName());
     }
     
     public void deleteFriendGroupById(int id) {

@@ -4,14 +4,18 @@ import com.capstone.dayj.appUserFriendGroup.AppUserFriendGroup;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
-import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 @Entity
-@Data
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+
 public class FriendGroup {
     
     @Id
@@ -32,4 +36,17 @@ public class FriendGroup {
     @Column(nullable = false)
     @ColumnDefault("0")
     private boolean groupExit;
+
+    public void update(String groupName) {
+        this.groupName = groupName;
+    }
+
+    @Builder
+    public FriendGroup(int id, List<AppUserFriendGroup> appUserFriendGroup, String groupGoal, String groupName, boolean groupExit) {
+        this.id = id;
+        this.groupGoal = groupGoal;
+        this.groupName = groupName;
+        this.groupExit = groupExit;
+        this.appUserFriendGroup = appUserFriendGroup;
+    }
 }

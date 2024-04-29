@@ -24,15 +24,12 @@ public class FriendGroupController {
     public List<FriendGroup> readAllFriendGroup() {
         return friendGroupService.readAllFriendGroup();
     }
-    
+
     @GetMapping("/{id}")
-    public FriendGroup readFriendGroupById(@PathVariable int id) {
-        return friendGroupService.readFriendGroupById(id);
-    }
-    
+    public FriendGroupDto.Response readFriendGroupById(@PathVariable int id) { return friendGroupService.readFriendGroupById(id); }
     @PatchMapping("/{id}")
-    public void patchFriendGroup(@PathVariable int id, @Valid @RequestBody FriendGroup friendGroup) {
-        friendGroupService.updateFriendGroup(id, friendGroup);
+    public void patchFriendGroup(@PathVariable int id, @Valid @RequestBody FriendGroupDto.Request dto) {
+        friendGroupService.updateFriendGroup(id, dto);
     }
     
     @DeleteMapping("/{id}")
