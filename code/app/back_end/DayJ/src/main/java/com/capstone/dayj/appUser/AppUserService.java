@@ -17,7 +17,7 @@ public class AppUserService {
     public AppUser createAppUser(AppUser user) {
         return appUserRepository.save(user);
     }
-    
+
     public List<AppUser> readAllAppUser() {
         return appUserRepository.findAll();
     }
@@ -34,7 +34,7 @@ public class AppUserService {
     public void updateAppUser(int id, AppUserDto.Request dto) {
         AppUser existingAppUser = appUserRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.APP_USER_NOT_FOUND));
-        
+
         existingAppUser.update(dto.getNickname());
     }
 

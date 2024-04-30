@@ -25,7 +25,7 @@ public class Post {
     @Column(nullable = false)
     private int postView;
     private int postLike;
-    
+
     @Column(nullable = false)
     private String postTitle;
     private String postContent;
@@ -80,3 +80,4 @@ public class Post {
         this.appUser = appUser;
     }
 }
+

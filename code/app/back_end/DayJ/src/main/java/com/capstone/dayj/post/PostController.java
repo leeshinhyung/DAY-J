@@ -26,22 +26,22 @@ public class PostController {
     public List<Post> readAllPost() {
         return postService.readAllPost();
     }
-    
+
 //    @GetMapping
 //    public List<PostDto.Response> readAllPost() {
 //        return postService.readAllPost();
 //    }
-    
+
     @GetMapping("/{id}")
     public PostDto.Response readPostById(@PathVariable int id) {
         return postService.readPostById(id);
     }
-    
+
     @PatchMapping("/{id}")
     public void patchPost(@PathVariable int id, @Valid @RequestBody PostDto.Request post) {
         postService.updatePost(id, post);
     }
-    
+
     @DeleteMapping("/{id}")
     public void deletePostById(@PathVariable int id) {
         postService.deletePostById(id);

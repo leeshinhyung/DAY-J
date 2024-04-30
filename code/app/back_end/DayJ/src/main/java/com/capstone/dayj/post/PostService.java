@@ -1,5 +1,7 @@
 package com.capstone.dayj.post;
 
+
+import com.capstone.dayj.appUser.AppUser;
 import com.capstone.dayj.appUser.AppUserRepository;
 import com.capstone.dayj.exception.CustomException;
 import com.capstone.dayj.exception.ErrorCode;
@@ -8,12 +10,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class PostService {
-    
     private final PostRepository postRepository;
     private final AppUserRepository appUserRepository;
 
@@ -23,14 +23,14 @@ public class PostService {
                 .orElseThrow(() ->new CustomException(ErrorCode.APP_USER_NOT_FOUND));
         dto.setAppUser(appUser);
         Post post = dto.toEntity();
-        
+
         postRepository.save(post);
     }
-    
+
     public List<Post> readAllPost() {
         return postRepository.findAll();
     } // TODO 페이징 처리 필요함
-    
+
     @Transactional
     public PostDto.Response readPostById(int id) {
         Post post = postRepository.findById(id)
@@ -46,12 +46,12 @@ public class PostService {
         
         post.update(dto.getPostTitle(), dto.getPostContent(), dto.getPostTag(), dto.isPostIsAnonymous(), dto.getPostTag());
     }
-    
+
     @Transactional
     public void deletePostById(int postId) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new CustomException(ErrorCode.POST_NOT_FOUND));
-        
+
         postRepository.deleteById(post.getId());
     }
 }

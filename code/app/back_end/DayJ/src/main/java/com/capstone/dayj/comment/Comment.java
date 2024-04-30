@@ -47,7 +47,7 @@ public class Comment {
     @JsonIgnore
     private Post post;
 
-    public void update(String content, boolean commentIsAnonymous){
+    public void update(String content, boolean commentIsAnonymous) {
         this.content = content;
         this.commentIsAnonymous = commentIsAnonymous;
     }
