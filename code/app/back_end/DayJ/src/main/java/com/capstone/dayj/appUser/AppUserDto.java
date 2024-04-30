@@ -27,7 +27,7 @@ public class AppUserDto {
         private String provider; //공급자
         private String providerId; //공급 아이디
 
-        public AppUser toEntity(){
+        public AppUser toEntity() {
             return AppUser.builder()
                     .id(id)
                     .name(name)
@@ -58,7 +58,7 @@ public class AppUserDto {
         private final Setting setting;
 
 
-        public Response(AppUser appUser){
+        public Response(AppUser appUser) {
             this.id = appUser.getId();
             this.name = appUser.getName();
             this.nickname = appUser.getNickname();

@@ -44,7 +44,9 @@ public class CommentService {
     }
 
     public List<CommentDto.Response> readAllComment(int postId) {
-        Post post = postRepository.findById(postId)
+
+         Post post = postRepository.findById(postId)
+
                 .orElseThrow(()-> new CustomException(ErrorCode.POST_NOT_FOUND));
 
         List<Comment> comments = post.getComment();
@@ -74,3 +76,5 @@ public class CommentService {
         commentRepository.delete(comment);
     } // 작성자 본인만 삭제 가능
 }
+
+

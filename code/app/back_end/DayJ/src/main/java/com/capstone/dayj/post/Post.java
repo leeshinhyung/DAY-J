@@ -80,3 +80,4 @@ public class Post {
         this.appUser = appUser;
     }
 }
+

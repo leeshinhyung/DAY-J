@@ -1,5 +1,6 @@
 package com.capstone.dayj.post;
 
+
 import com.capstone.dayj.appUser.AppUser;
 import com.capstone.dayj.appUser.AppUserRepository;
 import com.capstone.dayj.exception.CustomException;
@@ -13,7 +14,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class PostService {
-
     private final PostRepository postRepository;
     private final AppUserRepository appUserRepository;
 
@@ -35,15 +35,15 @@ public class PostService {
     public PostDto.Response readPostById(int id) {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.POST_NOT_FOUND));
-
+        
         return new PostDto.Response(post);
     }
-
+    
     @Transactional
     public void updatePost(int postId, PostDto.Request dto) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new CustomException(ErrorCode.POST_NOT_FOUND));
-
+        
         post.update(dto.getPostTitle(), dto.getPostContent(), dto.getPostTag(), dto.isPostIsAnonymous(), dto.getPostTag());
     }
 

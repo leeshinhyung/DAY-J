@@ -1,6 +1,6 @@
 package com.capstone.dayj.setting;
 
-
+import com.capstone.dayj.appUser.AppUser;
 import com.capstone.dayj.appUser.AppUserDto;
 import com.capstone.dayj.appUser.AppUserService;
 import org.springframework.web.bind.annotation.GetMapping;
