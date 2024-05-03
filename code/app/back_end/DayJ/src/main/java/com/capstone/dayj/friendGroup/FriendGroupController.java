@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/friend-group")
+@RequestMapping("/api/friend-group")
 public class FriendGroupController {
     FriendGroupService friendGroupService;
     
