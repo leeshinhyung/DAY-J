@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/private/app-user")
+@RequestMapping("/api/app-user")
 public class AppUserController {
     AppUserService appUserService;
 
