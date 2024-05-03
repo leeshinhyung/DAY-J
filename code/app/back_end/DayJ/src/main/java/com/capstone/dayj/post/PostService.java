@@ -1,5 +1,6 @@
 package com.capstone.dayj.post;
 
+import com.capstone.dayj.appUser.AppUser;
 import com.capstone.dayj.appUser.AppUserRepository;
 import com.capstone.dayj.exception.CustomException;
 import com.capstone.dayj.exception.ErrorCode;
@@ -8,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -16,11 +16,11 @@ public class PostService {
     
     private final PostRepository postRepository;
     private final AppUserRepository appUserRepository;
-
+    
     @Transactional
     public void createPost(PostDto.Request dto, int userId) {
         AppUser appUser = appUserRepository.findById(userId)
-                .orElseThrow(() ->new CustomException(ErrorCode.APP_USER_NOT_FOUND));
+                .orElseThrow(() -> new CustomException(ErrorCode.APP_USER_NOT_FOUND));
         dto.setAppUser(appUser);
         Post post = dto.toEntity();
         
