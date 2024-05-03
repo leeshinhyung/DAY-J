@@ -27,6 +27,7 @@ public class FriendGroupController {
 
     @GetMapping("/{id}")
     public FriendGroupDto.Response readFriendGroupById(@PathVariable int id) { return friendGroupService.readFriendGroupById(id); }
+    
     @PatchMapping("/{id}")
     public void patchFriendGroup(@PathVariable int id, @Valid @RequestBody FriendGroupDto.Request dto) {
         friendGroupService.updateFriendGroup(id, dto);

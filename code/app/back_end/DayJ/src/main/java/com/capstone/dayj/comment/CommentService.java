@@ -46,7 +46,6 @@ public class CommentService {
     public List<CommentDto.Response> readAllComment(int postId) {
 
          Post post = postRepository.findById(postId)
-
                 .orElseThrow(()-> new CustomException(ErrorCode.POST_NOT_FOUND));
 
         List<Comment> comments = post.getComment();
