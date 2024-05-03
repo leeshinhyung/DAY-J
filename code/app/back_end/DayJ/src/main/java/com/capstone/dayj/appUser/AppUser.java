@@ -1,6 +1,7 @@
 package com.capstone.dayj.appUser;
 
 import com.capstone.dayj.appUserFriendGroup.AppUserFriendGroup;
+import com.capstone.dayj.comment.Comment;
 import com.capstone.dayj.plan.Plan;
 import com.capstone.dayj.post.Post;
 import com.capstone.dayj.comment.Comment;
@@ -9,8 +10,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+
 
 import java.util.List;
 
@@ -75,6 +78,4 @@ public class AppUser {
         this.setting = setting;
     }
 }
-
-    
 

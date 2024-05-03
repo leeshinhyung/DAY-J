@@ -42,4 +42,3 @@ public class OAuth2AppUserService extends DefaultOAuth2UserService {
         return oAuth2User;
     }
 }
-
