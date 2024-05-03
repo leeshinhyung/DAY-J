@@ -21,49 +21,49 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
+    
     @Column(nullable = false)
     private int postView;
     private int postLike;
-
+    
     @Column(nullable = false)
     private String postTitle;
     private String postContent;
     private String postTag;
-
+    
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private LocalDateTime postCreateDate;
-
+    
     @LastModifiedDate
     @Column(nullable = false)
     private LocalDateTime postUpdateDate;
-
+    
     @Column(nullable = false)
     @ColumnDefault("1")
     private boolean postIsAnonymous;
-
+    
     @Column(nullable = false)
     private String postPhoto;
-
+    
     @OneToMany(mappedBy = "post")
     @JsonIgnore
     private List<Comment> comment;
-
+    
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "app_user_id", referencedColumnName = "id")
     private AppUser appUser;
-
-    public void update(String postTitle, String postContent, String postTag, boolean postIsAnonymous, String postPhoto){
+    
+    public void update(String postTitle, String postContent, String postTag, boolean postIsAnonymous, String postPhoto) {
         this.postTitle = postTitle;
         this.postContent = postContent;
         this.postTag = postTag;
         this.postIsAnonymous = postIsAnonymous;
         this.postPhoto = postPhoto;
     }
-
+    
     @Builder
     public Post(int id, int postView, int postLike, String postTitle, String postContent, String postTag, LocalDateTime postCreateDate, LocalDateTime postUpdateDate, boolean postIsAnonymous, String postPhoto, List<Comment> comment, AppUser appUser) {
         this.id = id;

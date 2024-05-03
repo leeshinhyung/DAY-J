@@ -6,6 +6,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PlanService {
@@ -22,14 +23,13 @@ public class PlanService {
     }
     
     @Transactional
-    public List<Plan> readAllPlan() {
-        // TODO : Dto로 변환
+    public List<PlanDto.Response> readAllPlan() {
         List<Plan> plans = planRepository.findAll();
         
         if (plans.isEmpty())
             throw new CustomException(ErrorCode.PLAN_NOT_FOUND);
         
-        return plans;
+        return plans.stream().map(PlanDto.Response::new).collect(Collectors.toList());
     }
     
     @Transactional
