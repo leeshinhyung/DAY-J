@@ -30,11 +30,13 @@ public class CommentService {
     }
 
     @Transactional
-    public void createComment (int postId, CommentDto.Request dto) {
+    public void createComment (int postId, int userId, CommentDto.Request dto) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(()-> new CustomException(ErrorCode.POST_NOT_FOUND));
-        AppUser user = appUserRepository.findByName(currentUserProvider.getCurrentUserName())
+        AppUser user = appUserRepository.findById(userId)
                 .orElseThrow(() -> new CustomException(ErrorCode.APP_USER_NOT_FOUND));
+//        AppUser user = appUserRepository.findByName(currentUserProvider.getCurrentUserName())
+//                .orElseThrow(() -> new CustomException(ErrorCode.APP_USER_NOT_FOUND));
 
         dto.setAppUser(user);
         dto.setPost(post);
@@ -53,15 +55,16 @@ public class CommentService {
         return comments.stream().map(CommentDto.Response::new).collect(Collectors.toList());
     }
 
+    @Transactional
     public CommentDto.Response readCommentById(int postId, int commentId){
-        Comment comment = commentRepository.findCommentByPostIdAndId(postId, commentId)
+        Comment comment = commentRepository.findByPostIdAndId(postId, commentId)
                 .orElseThrow(()-> new CustomException(ErrorCode.COMMENT_NOT_FOUND));
 
         return new CommentDto.Response(comment);
     }
     @Transactional
     public void patchComment(int postId, int commentId, CommentDto.Request dto){
-        Comment comment = commentRepository.findCommentByPostIdAndId(postId, commentId)
+        Comment comment = commentRepository.findByPostIdAndId(postId, commentId)
                 .orElseThrow(()-> new CustomException(ErrorCode.COMMENT_NOT_FOUND));
 
         comment.update(dto.getContent(), dto.isCommentIsAnonymous());
@@ -69,7 +72,7 @@ public class CommentService {
 
     @Transactional
     public void deleteCommentById(int postId, int commentId){
-        Comment comment = commentRepository.findCommentByPostIdAndId(postId, commentId)
+        Comment comment = commentRepository.findByPostIdAndId(postId, commentId)
                 .orElseThrow(()-> new CustomException(ErrorCode.COMMENT_NOT_FOUND));
 
         commentRepository.delete(comment);

@@ -4,15 +4,6 @@ package com.capstone.dayj.comment;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
-
-import com.capstone.dayj.appUser.AppUser;
-import jakarta.validation.Valid;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.*;
-
-import java.security.Principal;
-
 import java.util.List;
 
 @RestController
@@ -25,9 +16,9 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @PostMapping("/{post_id}/comment")
-    public void createComment(@PathVariable int post_id, @Valid @RequestBody CommentDto.Request dto){
-        commentService.createComment(post_id, dto);
+    @PostMapping("/{post_id}/user/{app_user_id}/comment")
+    public void createComment(@PathVariable int post_id, @PathVariable int app_user_id, @Valid @RequestBody CommentDto.Request dto){
+        commentService.createComment(post_id, app_user_id, dto);
     }
 
     @GetMapping("/{post_id}/comment")
