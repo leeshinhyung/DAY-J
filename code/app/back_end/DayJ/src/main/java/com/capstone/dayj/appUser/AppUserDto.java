@@ -3,6 +3,7 @@ package com.capstone.dayj.appUser;
 import com.capstone.dayj.appUserFriendGroup.AppUserFriendGroup;
 import com.capstone.dayj.comment.CommentDto;
 import com.capstone.dayj.plan.Plan;
+import com.capstone.dayj.plan.PlanDto;
 import com.capstone.dayj.post.PostDto;
 import com.capstone.dayj.setting.Setting;
 import lombok.*;
@@ -52,7 +53,7 @@ public class AppUserDto {
         private final String provider; //공급자
         private final String providerId; //공급 아이디
         private final List<AppUserFriendGroup> appUserFriendGroup;
-        private final List<Plan> plans;
+        private final List<PlanDto.Response> plans;
         private final List<PostDto.Response> posts;
         private final List<CommentDto.Response> comments;
         private final Setting setting;
@@ -68,7 +69,7 @@ public class AppUserDto {
             this.provider = appUser.getProvider();
             this.providerId = appUser.getProviderId();
             this.appUserFriendGroup = appUser.getAppUserFriendGroup();
-            this.plans = appUser.getPlans();
+            this.plans = appUser.getPlans().stream().map(PlanDto.Response::new).collect(Collectors.toList());
             this.posts = appUser.getPosts().stream().map(PostDto.Response::new).collect(Collectors.toList());
             this.comments = appUser.getComments().stream().map(CommentDto.Response::new).collect(Collectors.toList());
             this.setting = appUser.getSetting();

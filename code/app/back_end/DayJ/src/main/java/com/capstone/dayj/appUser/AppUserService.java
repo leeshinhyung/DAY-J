@@ -45,4 +45,12 @@ public class AppUserService {
 
         appUserRepository.deleteById(appUser.getId());
     }
+
+    @Transactional
+    public AppUserDto.Response readAppUserByEmail(String email) {
+        AppUser appUser = appUserRepository.findByEmail(email)
+                .orElseThrow(()-> new CustomException(ErrorCode.APP_USER_NOT_FOUND));
+
+        return new AppUserDto.Response(appUser);
+    }
 }

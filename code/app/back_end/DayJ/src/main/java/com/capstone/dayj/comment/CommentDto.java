@@ -46,6 +46,7 @@ public class CommentDto {
         private final Post post;
 
         public Response(Comment comment){
+
             this.id = comment.getId();
             this.content = comment.getContent();
             this.commentCreateDate = comment.getCommentCreateDate();
@@ -54,6 +55,5 @@ public class CommentDto {
             this.appUser = comment.getAppUser();
             this.post = comment.getPost();
         }
-
     }
 }

@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -26,8 +27,10 @@ public class PostService {
         postRepository.save(post);
     }
 
-    public List<Post> readAllPost() {
-        return postRepository.findAll();
+    public List<PostDto.Response> readAllPost() {
+        List<Post> posts = postRepository.findAll();
+
+        return posts.stream().map(PostDto.Response::new).collect(Collectors.toList());
     } // TODO 페이징 처리 필요함
 
     @Transactional

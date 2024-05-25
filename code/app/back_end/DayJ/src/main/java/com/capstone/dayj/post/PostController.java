@@ -23,14 +23,9 @@ public class PostController {
     }
 
     @GetMapping
-    public List<Post> readAllPost() {
+    public List<PostDto.Response> readAllPost() {
         return postService.readAllPost();
     }
-
-//    @GetMapping
-//    public List<PostDto.Response> readAllPost() {
-//        return postService.readAllPost();
-//    }
 
     @GetMapping("/{id}")
     public PostDto.Response readPostById(@PathVariable int id) {
