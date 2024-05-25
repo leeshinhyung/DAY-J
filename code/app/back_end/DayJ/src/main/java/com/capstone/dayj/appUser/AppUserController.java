@@ -24,6 +24,11 @@ public class AppUserController {
         return appUserService.readAllAppUser();
     }
 
+    @GetMapping("email/{email}")
+    public AppUserDto.Response readAppUserByEmail(@PathVariable String email){
+        return appUserService.readAppUserByEmail(email);
+    }
+
     @GetMapping("/{id}")
     public AppUserDto.Response readAppUserById(@PathVariable int id) {
         return appUserService.readAppUserById(id);

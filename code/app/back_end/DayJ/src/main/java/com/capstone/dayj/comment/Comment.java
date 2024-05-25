@@ -37,12 +37,12 @@ public class Comment {
     @ColumnDefault("1")
     private boolean commentIsAnonymous;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "app_user_id", referencedColumnName = "id")
     @JsonIgnore
     private AppUser appUser;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "post_id", referencedColumnName = "id")
     @JsonIgnore
     private Post post;
