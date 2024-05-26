@@ -56,9 +56,9 @@ public class Post {
     @JsonIgnore
     private List<Comment> comment;
     
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "app_user_id", referencedColumnName = "id")
+    @JsonIgnore
     private AppUser appUser;
     
     public void update(String postTitle, String postContent, String postTag, boolean postIsAnonymous, String postPhoto) {
