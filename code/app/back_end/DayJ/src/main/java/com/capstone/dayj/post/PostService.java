@@ -31,7 +31,7 @@ public class PostService {
         List<Post> posts = postRepository.findAll();
 
         return posts.stream().map(PostDto.Response::new).collect(Collectors.toList());
-    } // TODO 페이징 처리 필요함
+    } //// TODO 페이징 처리 필요함
 
     @Transactional
     public PostDto.Response readPostById(int id) {
