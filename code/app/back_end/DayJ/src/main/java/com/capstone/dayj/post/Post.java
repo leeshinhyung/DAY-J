@@ -8,14 +8,15 @@ import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EntityListeners(AuditingEntityListener.class)
 @ToString(exclude = {"comment", "appUser"})
 public class Post {
     @Id
@@ -44,7 +45,7 @@ public class Post {
     @ColumnDefault("1")
     private boolean postIsAnonymous;
     
-    @Column(nullable = false)
+    @Column
     private String postPhoto;
     
     @OneToMany(mappedBy = "post")
