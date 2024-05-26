@@ -23,11 +23,15 @@ public class Post {
     private int id;
     
     @Column(nullable = false)
+    @ColumnDefault("0")
     private int postView;
+    @Column(nullable = false)
+    @ColumnDefault("0")
     private int postLike;
     
     @Column(nullable = false)
     private String postTitle;
+    @Column(nullable = false)
     private String postContent;
     private String postTag;
     
@@ -44,7 +48,6 @@ public class Post {
     @ColumnDefault("1")
     private boolean postIsAnonymous;
     
-    @Column(nullable = false)
     private String postPhoto;
     
     @OneToMany(mappedBy = "post")
