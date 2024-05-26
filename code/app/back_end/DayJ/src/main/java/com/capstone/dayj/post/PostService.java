@@ -22,9 +22,7 @@ public class PostService {
         AppUser appUser = appUserRepository.findById(userId)
                 .orElseThrow(() -> new CustomException(ErrorCode.APP_USER_NOT_FOUND));
         dto.setAppUser(appUser);
-        Post post = dto.toEntity();
-
-        postRepository.save(post);
+        postRepository.save(dto.toEntity());
     }
 
     public List<PostDto.Response> readAllPost() {

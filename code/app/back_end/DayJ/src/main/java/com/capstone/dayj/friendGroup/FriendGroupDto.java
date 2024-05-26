@@ -35,8 +35,7 @@ public class FriendGroupDto {
         private final String groupName;
         private final boolean groupExit;
         private final List<AppUserFriendGroup> appUserFriendGroup;
-
-
+        
         public Response(FriendGroup friendGroup){
             this.id = friendGroup.getId();
             this.groupGoal = friendGroup.getGroupGoal();

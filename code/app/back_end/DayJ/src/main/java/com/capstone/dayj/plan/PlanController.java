@@ -14,9 +14,9 @@ public class PlanController {
         this.planService = planService;
     }
     
-    @PostMapping
-    public void createPlan(@Valid @RequestBody PlanDto.Request dto) {
-        planService.createPlan(dto);
+    @PostMapping("/{user_id}")
+    public void createPlan(@PathVariable int user_id, @Valid @RequestBody PlanDto.Request dto) {
+        planService.createPlan(user_id, dto);
     }
     
     @GetMapping
@@ -29,9 +29,9 @@ public class PlanController {
         return planService.readPlanById(id);
     }
     
-    @GetMapping("tag/{planTag}")
-    public PlanDto.Response readByPlanTag(@PathVariable String planTag) {
-        return planService.readPlanByPlanTag(planTag);
+    @GetMapping("tag/{plan_tag}")
+    public PlanDto.Response readByPlanTag(@PathVariable String plan_tag) {
+        return planService.readPlanByPlanTag(plan_tag);
     }
     
     @PatchMapping("/{id}")
