@@ -2,10 +2,10 @@ package com.capstone.dayj.appUser;
 
 import com.capstone.dayj.appUserFriendGroup.AppUserFriendGroup;
 import com.capstone.dayj.comment.CommentDto;
-import com.capstone.dayj.plan.Plan;
 import com.capstone.dayj.plan.PlanDto;
 import com.capstone.dayj.post.PostDto;
 import com.capstone.dayj.setting.Setting;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import java.util.List;
@@ -52,10 +52,15 @@ public class AppUserDto {
         private final String role; //유저 권한
         private final String provider; //공급자
         private final String providerId; //공급 아이디
+        @JsonIgnore
         private final List<AppUserFriendGroup> appUserFriendGroup;
+        @JsonIgnore
         private final List<PlanDto.Response> plans;
+        @JsonIgnore
         private final List<PostDto.Response> posts;
+        @JsonIgnore
         private final List<CommentDto.Response> comments;
+        @JsonIgnore
         private final Setting setting;
 
 

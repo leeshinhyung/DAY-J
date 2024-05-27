@@ -10,19 +10,13 @@ import org.hibernate.annotations.ColumnDefault;
 @Entity
 @Data
 public class Setting {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(nullable = false)
     private String nickname;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id", referencedColumnName = "id")
-    @JsonIgnore
-    private AppUser appUser;
-
+    
     @Column(nullable = false)
     @ColumnDefault("0")
     private boolean planAlarm;
@@ -42,5 +36,9 @@ public class Setting {
     @Column(nullable = false)
     private String profilePhoto;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id", referencedColumnName = "id")
+    @JsonIgnore
+    private AppUser appUser;
 
 }

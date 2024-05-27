@@ -1,25 +1,28 @@
 package com.capstone.dayj.plan;
 
+import com.capstone.dayj.appUser.AppUser;
+import com.capstone.dayj.appUser.AppUserRepository;
 import com.capstone.dayj.exception.CustomException;
 import com.capstone.dayj.exception.ErrorCode;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class PlanService {
-    private PlanRepository planRepository;
-    
-    public PlanService(PlanRepository planRepository) {
-        this.planRepository = planRepository;
-    }
+    private final PlanRepository planRepository;
+    private final AppUserRepository appUserRepository;
     
     @Transactional
-    public void createPlan(PlanDto.Request dto) {
-        Plan plan = dto.toEntity();
-        planRepository.save(plan);
+    public void createPlan(int userId, PlanDto.Request dto) {
+        AppUser appUser = appUserRepository.findById(userId)
+                .orElseThrow(() -> new CustomException(ErrorCode.APP_USER_NOT_FOUND));
+        dto.setAppUser(appUser);
+        planRepository.save(dto.toEntity());
     }
     
     @Transactional
@@ -54,7 +57,7 @@ public class PlanService {
                 .orElseThrow(() -> new CustomException(ErrorCode.PLAN_NOT_FOUND));
         
         plan.update(dto.getPlanAlarmDate(), dto.getPlanTag(),
-                dto.getGoal(), dto.getPlanPhoto(), dto.getPlanTime(), dto.getPlanDay());
+                dto.getGoal(), dto.getPlanPhoto(), dto.getPlanTime(), dto.getPlanDay(), dto.isPublic(), dto.isComplete());
     }
     
     @Transactional

@@ -2,6 +2,7 @@ package com.capstone.dayj.post;
 
 import com.capstone.dayj.appUser.AppUser;
 import com.capstone.dayj.comment.CommentDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -51,7 +52,9 @@ public class PostDto {
         private final LocalDateTime postUpdateDate;
         private final boolean postIsAnonymous;
         private final String postPhoto;
+        @JsonIgnore
         private final AppUser appUser;
+        @JsonIgnore
         private final List<CommentDto.Response> comment;
 
         /* Entity -> Dto */
