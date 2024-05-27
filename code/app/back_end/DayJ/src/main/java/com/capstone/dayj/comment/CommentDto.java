@@ -2,6 +2,7 @@ package com.capstone.dayj.comment;
 
 import com.capstone.dayj.appUser.AppUser;
 import com.capstone.dayj.post.Post;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -42,7 +43,9 @@ public class CommentDto {
         private final LocalDateTime commentCreateDate;
         private final LocalDateTime commentUpdateDate;
         private final boolean commentIsAnonymous;
+        @JsonIgnore
         private final AppUser appUser;
+        @JsonIgnore
         private final Post post;
 
         public Response(Comment comment){

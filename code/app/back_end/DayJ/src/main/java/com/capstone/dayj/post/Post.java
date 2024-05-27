@@ -2,7 +2,6 @@ package com.capstone.dayj.post;
 
 import com.capstone.dayj.appUser.AppUser;
 import com.capstone.dayj.comment.Comment;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -53,12 +52,10 @@ public class Post {
     private String postPhoto;
     
     @OneToMany(mappedBy = "post")
-    @JsonIgnore
     private List<Comment> comment;
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "app_user_id", referencedColumnName = "id")
-    @JsonIgnore
     private AppUser appUser;
     
     public void update(String postTitle, String postContent, String postTag, boolean postIsAnonymous, String postPhoto) {

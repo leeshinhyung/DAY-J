@@ -1,6 +1,7 @@
 package com.capstone.dayj.plan;
 
 import com.capstone.dayj.appUser.AppUser;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -56,6 +57,7 @@ public class PlanDto {
         private final String goal;
         private final boolean isComplete;
         private final boolean isPublic;
+        @JsonIgnore
         private final AppUser appUser;
         
         /* Entity -> Dto */

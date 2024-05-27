@@ -2,15 +2,16 @@ package com.capstone.dayj.appUserFriendGroup;
 
 import com.capstone.dayj.appUser.AppUser;
 import com.capstone.dayj.friendGroup.FriendGroup;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(exclude = {"appUser"})
+//@ToString(exclude = {"appUser"})
 public class AppUserFriendGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,14 +19,10 @@ public class AppUserFriendGroup {
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "app_user_id", referencedColumnName = "id")
-    @JsonBackReference
-    @JsonIgnore
     private AppUser appUser;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "friend_group_id", referencedColumnName = "id")
-    @JsonBackReference
-    @JsonIgnore
     private FriendGroup friendGroup;
     
     @Builder
