@@ -1,7 +1,6 @@
 package com.capstone.dayj.plan;
 
 import com.capstone.dayj.appUser.AppUser;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -21,7 +20,7 @@ public class Plan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    //    @Column(nullable = false)
+    // @Column(nullable = false)
     private LocalDateTime planAlarmDate;
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
@@ -49,9 +48,8 @@ public class Plan {
     @ColumnDefault("0")
     private boolean isPublic;
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "app_user_id", referencedColumnName = "id")
-    @JsonIgnore
     private AppUser appUser;
     
     public void update(LocalDateTime planAlarmDate, String planTag, String goal, String planPhoto, LocalDateTime planTime, LocalDateTime planDay, boolean isPublic, boolean isComplete) {

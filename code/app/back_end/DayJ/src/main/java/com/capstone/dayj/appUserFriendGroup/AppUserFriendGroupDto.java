@@ -2,6 +2,7 @@ package com.capstone.dayj.appUserFriendGroup;
 
 import com.capstone.dayj.appUser.AppUser;
 import com.capstone.dayj.friendGroup.FriendGroup;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 public class AppUserFriendGroupDto {
@@ -26,7 +27,9 @@ public class AppUserFriendGroupDto {
     @Getter
     public static class Response {
         private final int id;
+        @JsonIgnore
         private final AppUser appUser;
+        @JsonIgnore
         private final FriendGroup friendGroup;
         
         public Response(AppUserFriendGroup appUserFriendGroup) {
