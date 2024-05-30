@@ -2,11 +2,14 @@ package com.capstone.dayj.friendGroup;
 
 import com.capstone.dayj.exception.CustomException;
 import com.capstone.dayj.exception.ErrorCode;
+import com.capstone.dayj.post.Post;
+import com.capstone.dayj.post.PostDto;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -17,13 +20,13 @@ public class FriendGroupService {
         friendGroupRepository.save(group);
     }
     
-    public List<FriendGroup> readAllFriendGroup() {
+    public List<FriendGroupDto.Response> readAllFriendGroup() {
         List<FriendGroup> friendGroups = friendGroupRepository.findAll();
-        
+
         if (friendGroups.isEmpty())
             throw new CustomException(ErrorCode.FRIEND_GROUP_NOT_FOUND);
         
-        return friendGroupRepository.findAll();
+        return friendGroups.stream().map(FriendGroupDto.Response::new).collect(Collectors.toList());
     }
 
     @Transactional

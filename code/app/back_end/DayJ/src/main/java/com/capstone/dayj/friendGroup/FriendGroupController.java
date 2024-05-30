@@ -1,5 +1,6 @@
 package com.capstone.dayj.friendGroup;
 
+import com.capstone.dayj.post.PostDto;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,7 @@ public class FriendGroupController {
     }
     
     @GetMapping
-    public List<FriendGroup> readAllFriendGroup() {
+    public List<FriendGroupDto.Response> readAllFriendGroup() {
         return friendGroupService.readAllFriendGroup();
     }
 
