@@ -38,6 +38,16 @@ public class PostService {
         
         return new PostDto.Response(post);
     }
+
+    @Transactional
+    public PostDto.Response readPostByTag(String tag){
+        Post post = postRepository.findByPostTag(tag)
+                .orElseThrow(() -> new CustomException(ErrorCode.POST_NOT_FOUND));
+
+        return new PostDto.Response(post);
+    }
+
+    //readByPostTag 구현 필요함
     
     @Transactional
     public void updatePost(int postId, PostDto.Request dto) {

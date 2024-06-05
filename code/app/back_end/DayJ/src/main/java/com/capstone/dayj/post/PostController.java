@@ -32,6 +32,10 @@ public class PostController {
         return postService.readPostById(id);
     }
 
+    @GetMapping("tag/{post_tag}")
+    public PostDto.Response readPostByTag(@PathVariable String post_tag){
+        return postService.readPostByTag(post_tag);
+    }
     @PatchMapping("/{id}")
     public void patchPost(@PathVariable int id, @Valid @RequestBody PostDto.Request post) {
         postService.updatePost(id, post);
