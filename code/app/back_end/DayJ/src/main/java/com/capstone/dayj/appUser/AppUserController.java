@@ -20,7 +20,7 @@ public class AppUserController {
     }
 
     @GetMapping
-    public List<AppUser> readAllAppUser() {
+    public List<AppUserDto.Response> readAllAppUser() {
         return appUserService.readAllAppUser();
     }
 

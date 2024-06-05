@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -18,8 +19,10 @@ public class AppUserService {
         return appUserRepository.save(user);
     }
 
-    public List<AppUser> readAllAppUser() {
-        return appUserRepository.findAll();
+    public List<AppUserDto. Response> readAllAppUser() {
+        List<AppUser> appUsers = appUserRepository.findAll();
+
+        return appUsers.stream().map(AppUserDto.Response::new).collect(Collectors.toList());
     }
 
     @Transactional
