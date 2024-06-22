@@ -44,13 +44,13 @@ public class AppUser {
     @OneToMany(mappedBy = "appUser")
     private List<Comment> comments;
 
-    @OneToOne(mappedBy = "appUser")
+    @OneToOne(mappedBy = "appUser", cascade = CascadeType.ALL)
     private Setting setting;
 
     public void update(String nickname) {
         this.nickname = nickname;
     }
-    
+
     @Builder
     public AppUser(int id, String name, String nickname, String password, String email, String role, String provider, String providerId, List<AppUserFriendGroup> appUserFriendGroup, List<Plan> plans, List<Post> posts, List<Comment> comments, Setting setting) {
         this.id = id;

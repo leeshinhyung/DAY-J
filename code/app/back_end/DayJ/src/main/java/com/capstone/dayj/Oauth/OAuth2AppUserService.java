@@ -19,7 +19,7 @@ public class OAuth2AppUserService extends DefaultOAuth2UserService {
     private final BCryptPasswordEncoder encoder;
     private final AppUserRepository appUserRepository;
 
-    public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException{
+    public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(userRequest);
         String provider = userRequest.getClientRegistration().getClientId();
         String providerId = oAuth2User.getAttribute("sub");
@@ -28,6 +28,7 @@ public class OAuth2AppUserService extends DefaultOAuth2UserService {
         String role = "ROLE_USER"; //일반 유저
         String nickname = "test"; // nickname 설정
         Optional<AppUser> findAppUser = appUserRepository.findByName(username);
+
         if (findAppUser.isEmpty()) { //찾지 못했다면
             AppUserDto.Request appUser = AppUserDto.Request.builder()
                     .name(username)
@@ -36,7 +37,8 @@ public class OAuth2AppUserService extends DefaultOAuth2UserService {
                     .role(role)
                     .nickname(nickname)
                     .provider(provider)
-                    .providerId(providerId).build();
+                    .providerId(providerId)
+                    .build();
             appUserRepository.save(appUser.toEntity());
         }
         return oAuth2User;

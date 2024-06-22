@@ -1,25 +1,23 @@
 package com.capstone.dayj.setting;
 
-import com.capstone.dayj.appUser.AppUser;
-import com.capstone.dayj.appUser.AppUserDto;
-import com.capstone.dayj.appUser.AppUserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api/app-user/{user_id}/setting")
 public class SettingController {
     private SettingService settingService;
-    private AppUserService appUserService;
 
-    public SettingController(SettingService settingService, AppUserService appUserService) {
+    public SettingController(SettingService settingService) {
         this.settingService = settingService;
-        this.appUserService = appUserService;
     }
 
-    @GetMapping("/appUser/read/{id}/setting")
-    public Setting readSettingForUser(@PathVariable int id) {
-        AppUserDto.Response appUser = appUserService.readAppUserById(id);
-        return appUser.getSetting();
+    @GetMapping
+    public SettingDto.Response readSettingForUser(@PathVariable int user_id) {
+        return settingService.readSettingById(user_id);
+    }
+
+    @PatchMapping
+    public void patchSetting(@PathVariable int user_id, @RequestBody SettingDto.Request dto) {
+        settingService.patchSetting(user_id, dto);
     }
 }

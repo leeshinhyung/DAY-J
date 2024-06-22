@@ -1,35 +1,40 @@
 package com.capstone.dayj.setting;
 
 
+import com.capstone.dayj.appUser.AppUser;
+import com.capstone.dayj.appUser.AppUserRepository;
+import com.capstone.dayj.exception.CustomException;
+import com.capstone.dayj.exception.ErrorCode;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class SettingService {
     private SettingRepository settingRepository;
-    
-    public SettingService(SettingRepository settingRepository) {
+    private AppUserRepository appUserRepository;
+
+    public SettingService(SettingRepository settingRepository, AppUserRepository appUserRepository) {
         this.settingRepository = settingRepository;
+        this.appUserRepository = appUserRepository;
     }
-    
-    public void createSetting(Setting setting) {
-        settingRepository.save(setting);
+
+    @Transactional
+    public SettingDto.Response readSettingById(int user_id) {
+        AppUser appUser = appUserRepository.findById(user_id)
+                .orElseThrow(() -> new CustomException(ErrorCode.APP_USER_NOT_FOUND));
+        return new SettingDto.Response(appUser.getSetting());
     }
-    
-    public List<Setting> readAllSetting() {
-        return settingRepository.findAll();
-    }
-    
-    public Setting readSettingById(int id) {
-        return settingRepository.findById(id).get();
-    }
-    
-    public void updateSetting(Setting setting) {
-        settingRepository.save(setting);
-    }
-    
-    public void deleteSettingById(int id) {
-        settingRepository.deleteById(id);
+
+    @Transactional
+    public void patchSetting(int user_id, SettingDto.Request dto) {
+        AppUser appUser = appUserRepository.findById(user_id)
+                .orElseThrow(() -> new CustomException(ErrorCode.APP_USER_NOT_FOUND));
+        Setting setting = appUser.getSetting();
+
+        setting.update(dto.isPlanAlarm(),
+                dto.isFriendGroupAlarm(),
+                dto.isPostAlarm(),
+                dto.isAppAlarm(),
+                dto.getProfilePhoto());
     }
 }
