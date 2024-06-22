@@ -27,6 +27,7 @@ public class AppUserDto {
         private String role; //유저 권한
         private String provider; //공급자
         private String providerId; //공급 아이디
+        private Setting setting;
 
         public AppUser toEntity() {
             return AppUser.builder()
@@ -38,6 +39,7 @@ public class AppUserDto {
                     .role(role)
                     .provider(provider)
                     .providerId(providerId)
+                    .setting(setting)
                     .build();
         }
     }

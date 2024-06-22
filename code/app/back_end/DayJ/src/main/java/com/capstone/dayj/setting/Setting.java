@@ -2,21 +2,19 @@ package com.capstone.dayj.setting;
 
 
 import com.capstone.dayj.appUser.AppUser;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
+@Getter
 @Entity
-@Data
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString(exclude = {"appUser"})
 public class Setting {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false)
-    private String nickname;
-    
     @Column(nullable = false)
     @ColumnDefault("0")
     private boolean planAlarm;
@@ -33,12 +31,28 @@ public class Setting {
     @ColumnDefault("0")
     private boolean appAlarm;
 
-    @Column(nullable = false)
     private String profilePhoto;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id", referencedColumnName = "id")
-    @JsonIgnore
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private AppUser appUser;
 
+    public void update(boolean planAlarm, boolean friendGroupAlarm, boolean postAlarm, boolean appAlarm, String profilePhoto) {
+        this.planAlarm = planAlarm;
+        this.friendGroupAlarm = friendGroupAlarm;
+        this.postAlarm = postAlarm;
+        this.appAlarm = appAlarm;
+        this.profilePhoto = profilePhoto;
+    }
+
+    @Builder
+    public Setting(int id, boolean planAlarm, boolean friendGroupAlarm, boolean postAlarm, boolean appAlarm, String profilePhoto, AppUser appUser) {
+        this.id = id;
+        this.planAlarm = planAlarm;
+        this.friendGroupAlarm = friendGroupAlarm;
+        this.postAlarm = postAlarm;
+        this.appAlarm = appAlarm;
+        this.profilePhoto = profilePhoto;
+        this.appUser = appUser;
+    }
 }
