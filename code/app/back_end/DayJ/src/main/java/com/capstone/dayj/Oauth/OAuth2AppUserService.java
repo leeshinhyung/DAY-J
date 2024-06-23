@@ -3,6 +3,8 @@ package com.capstone.dayj.Oauth;
 import com.capstone.dayj.appUser.AppUser;
 import com.capstone.dayj.appUser.AppUserDto;
 import com.capstone.dayj.appUser.AppUserRepository;
+import com.capstone.dayj.setting.SettingDto;
+import com.capstone.dayj.setting.SettingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -18,6 +20,7 @@ import java.util.Optional;
 public class OAuth2AppUserService extends DefaultOAuth2UserService {
     private final BCryptPasswordEncoder encoder;
     private final AppUserRepository appUserRepository;
+    private final SettingRepository settingRepository;
 
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(userRequest);
@@ -39,7 +42,14 @@ public class OAuth2AppUserService extends DefaultOAuth2UserService {
                     .provider(provider)
                     .providerId(providerId)
                     .build();
-            appUserRepository.save(appUser.toEntity());
+
+            AppUser realAppUser = appUser.toEntity();
+            appUserRepository.save(realAppUser);
+
+            SettingDto.Request setting = SettingDto.Request.builder()
+                    .appUser(realAppUser)
+                    .build();
+            settingRepository.save(setting.toEntity());
         }
         return oAuth2User;
     }

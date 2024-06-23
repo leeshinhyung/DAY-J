@@ -42,7 +42,6 @@ public class SettingDto {
         @JsonIgnore
         private final AppUser appUser;
 
-
         public Response(Setting setting) {
             this.id = setting.getId();
             this.planAlarm = setting.isPlanAlarm();

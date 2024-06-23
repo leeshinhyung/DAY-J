@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/plan")
+@RequestMapping("/api/app-user/{user_id}/plan")
 public class PlanController {
     private final PlanService planService;
     
@@ -14,7 +14,7 @@ public class PlanController {
         this.planService = planService;
     }
     
-    @PostMapping("/{user_id}")
+    @PostMapping
     public void createPlan(@PathVariable int user_id, @Valid @RequestBody PlanDto.Request dto) {
         planService.createPlan(user_id, dto);
     }
