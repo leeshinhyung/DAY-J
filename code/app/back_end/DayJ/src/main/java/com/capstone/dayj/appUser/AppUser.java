@@ -44,7 +44,7 @@ public class AppUser {
     @OneToMany(mappedBy = "appUser")
     private List<Comment> comments;
 
-    @OneToOne(mappedBy = "appUser", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "appUser")
     private Setting setting;
 
     public void update(String nickname) {
