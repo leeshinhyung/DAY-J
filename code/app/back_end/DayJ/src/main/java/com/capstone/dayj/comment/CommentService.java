@@ -1,6 +1,5 @@
 package com.capstone.dayj.comment;
 
-import com.capstone.dayj.Oauth.CurrentUserProvider;
 import com.capstone.dayj.appUser.AppUser;
 import com.capstone.dayj.appUser.AppUserRepository;
 import com.capstone.dayj.exception.CustomException;
@@ -9,8 +8,6 @@ import com.capstone.dayj.post.Post;
 import com.capstone.dayj.post.PostRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,12 +19,6 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final AppUserRepository appUserRepository;
     private final PostRepository postRepository;
-    private final CurrentUserProvider currentUserProvider;
-
-    private String getUserName(){
-        Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
-        return loggedInUser.getName();
-    }
 
     @Transactional
     public void createComment (int postId, int userId, CommentDto.Request dto) {
@@ -35,8 +26,6 @@ public class CommentService {
                 .orElseThrow(()-> new CustomException(ErrorCode.POST_NOT_FOUND));
         AppUser user = appUserRepository.findById(userId)
                 .orElseThrow(() -> new CustomException(ErrorCode.APP_USER_NOT_FOUND));
-//        AppUser user = appUserRepository.findByName(currentUserProvider.getCurrentUserName())
-//                .orElseThrow(() -> new CustomException(ErrorCode.APP_USER_NOT_FOUND));
 
         dto.setAppUser(user);
         dto.setPost(post);

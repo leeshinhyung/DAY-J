@@ -1,12 +1,11 @@
 package com.capstone.dayj.post;
 
-import com.capstone.dayj.plan.Plan;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.List;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Integer> {
-    Optional<Post> findByPostTag(String postTag);
+    List<Post> findByPostTag(String postTag);
 }

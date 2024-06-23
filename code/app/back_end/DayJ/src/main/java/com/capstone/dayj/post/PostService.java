@@ -28,6 +28,9 @@ public class PostService {
     public List<PostDto.Response> readAllPost() {
         List<Post> posts = postRepository.findAll();
 
+        if (posts.isEmpty())
+            throw new CustomException(ErrorCode.POST_NOT_FOUND);
+
         return posts.stream().map(PostDto.Response::new).collect(Collectors.toList());
     } //// TODO 페이징 처리 필요함
 
@@ -40,21 +43,21 @@ public class PostService {
     }
 
     @Transactional
-    public PostDto.Response readPostByTag(String tag){
-        Post post = postRepository.findByPostTag(tag)
-                .orElseThrow(() -> new CustomException(ErrorCode.POST_NOT_FOUND));
+    public List<PostDto.Response> readPostByTag(String tag){
+        List<Post> posts = postRepository.findByPostTag(tag);
 
-        return new PostDto.Response(post);
+        if (posts.isEmpty())
+            throw new CustomException(ErrorCode.POST_NOT_FOUND);
+
+        return posts.stream().map(PostDto.Response::new).collect(Collectors.toList());
     }
 
-    //readByPostTag 구현 필요함
-    
     @Transactional
     public void updatePost(int postId, PostDto.Request dto) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new CustomException(ErrorCode.POST_NOT_FOUND));
         
-        post.update(dto.getPostTitle(), dto.getPostContent(), dto.getPostTag(), dto.isPostIsAnonymous(), dto.getPostTag());
+        post.update(dto.getPostTitle(), dto.getPostContent(), dto.getPostTag(), dto.isPostIsAnonymous(), dto.getPostPhoto());
     }
 
     @Transactional
