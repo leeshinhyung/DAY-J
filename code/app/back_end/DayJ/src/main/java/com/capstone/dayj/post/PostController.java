@@ -1,9 +1,6 @@
 package com.capstone.dayj.post;
 
-import com.capstone.dayj.appUser.AppUser;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +14,7 @@ public class PostController {
         this.postService = postService;
     }
 
-    @PostMapping("/{user_id}")
+    @PostMapping("/app-user/{user_id}")
     public void createPost(@PathVariable int user_id, @Valid @RequestBody PostDto.Request dto) {
         postService.createPost(dto, user_id);
     }
@@ -27,22 +24,22 @@ public class PostController {
         return postService.readAllPost();
     }
 
-    @GetMapping("/{id}")
-    public PostDto.Response readPostById(@PathVariable int id) {
-        return postService.readPostById(id);
+    @GetMapping("/{post_id}")
+    public PostDto.Response readPostById(@PathVariable int post_id) {
+        return postService.readPostById(post_id);
     }
 
     @GetMapping("tag/{post_tag}")
-    public PostDto.Response readPostByTag(@PathVariable String post_tag){
+    public List<PostDto.Response> readPostByTag(@PathVariable String post_tag){
         return postService.readPostByTag(post_tag);
     }
-    @PatchMapping("/{id}")
-    public void patchPost(@PathVariable int id, @Valid @RequestBody PostDto.Request post) {
-        postService.updatePost(id, post);
+    @PatchMapping("/{post_id}")
+    public void patchPost(@PathVariable int post_id, @Valid @RequestBody PostDto.Request post) {
+        postService.updatePost(post_id, post);
     }
 
-    @DeleteMapping("/{id}")
-    public void deletePostById(@PathVariable int id) {
-        postService.deletePostById(id);
+    @DeleteMapping("/{post_id}")
+    public void deletePostById(@PathVariable int post_id) {
+        postService.deletePostById(post_id);
     }
 }
